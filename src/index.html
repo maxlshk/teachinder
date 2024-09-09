@@ -10,66 +10,49 @@
     </head>
 
     <body>
-        <header>
-            <div class="container">
-                <div class="logo-section">
-                    <div class="logo-switch-container">
-                        <a href="#">
-                            <img
-                                class="logo"
-                                src="images/logo.png"
-                                alt="Logo"
-                            />
-                        </a>
-                        <a href="#">
-                            <img
-                                class="logo-hover"
-                                src="images/logo-hovered.png"
-                                alt="Logo"
-                            />
-                        </a>
-                    </div>
+        <header class="container">
+            <div class="logo-section">
+                <a href="#" class="logo-text">Teachinder</a>
 
-                    <div class="header-search-block" id="header-search-block">
-                        <input
-                            type="text"
-                            class="header-search-field"
-                            id="header-search-field"
-                            name="search"
-                            placeholder="Name, note or age to search"
-                        />
-                        <button class="btn-search" id="search-button">
-                            Search
-                        </button>
-                    </div>
-                </div>
-
-                <div class="nav-section">
-                    <nav class="nav-list">
-                        <ul>
-                            <a href="#teachers">
-                                <li>Teachers</li>
-                            </a>
-                            <a href="#statistics">
-                                <li>Statistics</li>
-                            </a>
-                            <a href="#favorites">
-                                <li>Favorites</li>
-                            </a>
-                            <a href="#about">
-                                <li>About</li>
-                            </a>
-                        </ul>
-                    </nav>
-
-                    <button
-                        data-target="add-teacher-popup"
-                        type="button"
-                        class="btn"
-                    >
-                        Add teacher
+                <div class="header-search-block" id="header-search-block">
+                    <input
+                        type="text"
+                        class="header-search-field"
+                        id="header-search-field"
+                        name="search"
+                        placeholder="Name, note or age to search"
+                    />
+                    <button class="btn-search" id="search-button">
+                        Search
                     </button>
                 </div>
+            </div>
+
+            <div class="nav-section">
+                <nav class="nav-list">
+                    <ul>
+                        <a href="#teachers">
+                            <li>Teachers</li>
+                        </a>
+                        <a href="#statistics">
+                            <li>Statistics</li>
+                        </a>
+                        <a href="#favorites">
+                            <li>Favorites</li>
+                        </a>
+                        <a href="#about">
+                            <li>About</li>
+                        </a>
+                    </ul>
+                </nav>
+
+                <button
+                    data-target="add-teacher-popup"
+                    type="button"
+                    class="btn"
+                >
+                    Add teacher
+                </button>
             </div>
         </header>
 
@@ -116,10 +99,10 @@
                     <div class="teacher-filter">
                         <input
                             type="checkbox"
-                            id="favorites"
-                            name="favorites"
+                            id="favorites-only"
+                            name="favorites-only"
                         />
-                        <label for="favorites">Only favorites</label>
+                        <label for="favorites-only">Only favorites</label>
                     </div>
                 </div>
 
@@ -213,35 +196,40 @@
                     <thead>
                         <tr>
                             <th>
-                                Name<img
+                                Name
+                                <img
                                     class="statistics-table-head-arrow"
                                     src="images/blue-arrow-down.png"
                                     alt="arrow"
                                 />
                             </th>
                             <th>
-                                Specialty<img
+                                Specialty
+                                <img
                                     class="statistics-table-head-arrow"
                                     src="images/blue-arrow-down.png"
                                     alt="arrow"
                                 />
                             </th>
                             <th>
-                                Age<img
+                                Age
+                                <img
                                     class="statistics-table-head-arrow"
                                     src="images/blue-arrow-down.png"
                                     alt="arrow"
                                 />
                             </th>
                             <th>
-                                Gender<img
+                                Gender
+                                <img
                                     class="statistics-table-head-arrow"
                                     src="images/blue-arrow-down.png"
                                     alt="arrow"
                                 />
                             </th>
                             <th>
-                                Nationality<img
+                                Nationality
+                                <img
                                     class="statistics-table-head-arrow"
                                     src="images/blue-arrow-down.png"
                                     alt="arrow"
@@ -330,26 +318,17 @@
             </section>
 
             <!-- Favorites -->
-            <section id="section-favorites" class="container-favorites section">
+            <section id="favorites" class="container-favorites section">
                 <h2 class="section-title">Favorites</h2>
 
                 <div class="favorites-slider">
-                    <div class="arrow-left">
-                        <a href="#">
-                            <img
-                                class="disabled-left-arrow"
-                                src="images/left-arrow.png"
-                                alt="Left arrow"
-                            />
-                        </a>
-                        <a href="#">
-                            <img
-                                class="active-left-arrow"
-                                src="images/left-arrow-hovered.png"
-                                alt="Left arrow"
-                            />
-                        </a>
-                    </div>
+                    <a href="#">
+                        <img
+                            class="arrow"
+                            src="images/left-arrow.png"
+                            alt="Left arrow"
+                        />
+                    </a>
 
                     <div class="favorites-slider-grid">
                         <div
@@ -429,22 +408,13 @@
                         </div>
                     </div>
 
-                    <div class="arrow-right">
-                        <a href="#">
-                            <img
-                                class="disabled-right-arrow"
-                                src="images/right-arrow.png"
-                                alt="Right arrow"
-                            />
-                        </a>
-                        <a href="#">
-                            <img
-                                class="active-right-arrow"
-                                src="images/right-arrow-hovered.png"
-                                alt="Right arrow"
-                            />
-                        </a>
-                    </div>
+                    <a href="#">
+                        <img
+                            class="arrow"
+                            src="images/right-arrow.png"
+                            alt="Right arrow"
+                        />
+                    </a>
                 </div>
             </section>
 

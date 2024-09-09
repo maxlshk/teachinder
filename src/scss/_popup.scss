@@ -184,3 +184,27 @@ select.add-teacher-form-input {
     color: #1a9cb0;
     text-decoration-style: dashed;
 }
+
+@media screen and (max-width: 950px) {
+    .teacher-info-popup-content {
+        width: 100%;
+    }
+}
+
+@media screen and (max-height: 890px) {
+    .add-teacher-popup-content {
+        height: 100%;
+        overflow-y: scroll;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .add-teacher-popup-content {
+        width: 100%;
+    }
+
+    .teacher-info-popup-content {
+        height: 100%;
+        overflow-y: scroll;
+    }
+}

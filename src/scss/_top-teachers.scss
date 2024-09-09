@@ -1,15 +1,16 @@
 .teachers-filters {
     display: flex;
-    justify-self: start;
+    justify-content: center;
+    gap: 2rem;
     flex-wrap: wrap;
     width: 100%;
+    margin-bottom: 60px;
 }
 
 .teacher-filter {
     display: flex;
     align-items: center;
     padding: 2px 0;
-    margin-bottom: 60px;
 
     label {
         color: $secondary-color;
@@ -36,10 +37,6 @@
 .teacher-filter:not(:last-child) {
     border-right: 1px dashed $secondary-color;
     padding-right: 20px;
-}
-
-.teacher-filter:not(:first-child) {
-    margin-left: 20px;
 }
 
 .teachers-grid {
