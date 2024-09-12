@@ -58,21 +58,22 @@
   display: flex;
   align-items: center;
 }
-.nav-list ul {
-  display: flex;
-  gap: 3rem;
+.nav-list ul li {
+  display: inline;
+  transition: 0.25s;
+  float: left;
+  margin-right: 3rem;
+}
+.nav-list ul li:hover {
+  color: #cc4836;
+}
+.nav-list ul li:last-child {
+  margin-right: 0;
 }
 .nav-list ul a {
   font: normal bolder 1.2rem/1.5 "Roboto", sans-serif;
-  text-decoration: none;
   color: #f75c49;
-}
-.nav-list ul a li {
-  display: inline;
-  transition: 0.25s;
-}
-.nav-list ul a li:hover {
-  color: #cc4836;
+  text-decoration: none;
 }
 
 @media screen and (max-width: 820px) {
@@ -118,8 +119,11 @@
   .header-search-field:hover, .header-search-field:focus {
     width: 15rem;
   }
-  .nav-list ul {
-    gap: 1rem;
+  .nav-list ul li {
+    margin-right: 1rem;
+  }
+  .nav-list ul a {
+    font-size: 1rem;
   }
 }
 .teachers-filters {

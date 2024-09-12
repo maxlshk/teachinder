@@ -64,22 +64,25 @@
     align-items: center;
 
     ul {
-        display: flex;
-        gap: 3rem;
+        li {
+            display: inline;
+            transition: 0.25s;
+            float: left;
+            margin-right: 3rem;
+
+            &:hover {
+                color: $navigation-hovered-color;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
 
         a {
             font: $accent-font;
-            text-decoration: none;
             color: $primary-color;
-
-            li {
-                display: inline;
-                transition: 0.25s;
-
-                &:hover {
-                    color: $navigation-hovered-color;
-                }
-            }
+            text-decoration: none;
         }
     }
 }
@@ -141,7 +144,12 @@
     }
     .nav-list {
         ul {
-            gap: 1rem;
+            li {
+                margin-right: 1rem;
+            }
+            a {
+                font-size: 1rem;
+            }
         }
     }
 }
