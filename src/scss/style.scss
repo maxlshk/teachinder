@@ -37,6 +37,7 @@ p {
 }
 
 .section {
+    position: relative;
     padding: 40px 0 60px 0;
     text-align: center;
 }
@@ -49,12 +50,13 @@ p {
 
 .section::before {
     content: "";
-    width: 500px;
+    position: absolute;
+    justify-self: center;
+    top: 0px;
+    left: 25%;
+    width: 50%;
     height: 1px;
     background: #000;
-    position: absolute;
-    margin-top: -40px;
-    margin-left: -250px;
 }
 
 .btn {
@@ -90,7 +92,6 @@ footer {
 
     .container {
         width: 100%;
-        padding-left: 30px;
-        padding-right: 30px;
+        padding: inherit 30px;
     }
 }

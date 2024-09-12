@@ -331,10 +331,7 @@
                     </a>
 
                     <div class="favorites-slider-grid">
-                        <div
-                            class="teacher-card"
-                            onclick="show('teacher-info-popup')"
-                        >
+                        <div class="teacher-card">
                             <div class="teacher-card-photo">
                                 <img
                                     src="./images/patrick.png"
@@ -346,10 +343,7 @@
                             </p>
                             <p class="teacher-card-country">United States</p>
                         </div>
-                        <div
-                            class="teacher-card"
-                            onclick="show('teacher-info-popup')"
-                        >
+                        <div class="teacher-card">
                             <div class="teacher-card-photo">
                                 <img
                                     src="./images/patrick.png"
@@ -361,10 +355,7 @@
                             </p>
                             <p class="teacher-card-country">United States</p>
                         </div>
-                        <div
-                            class="teacher-card"
-                            onclick="show('teacher-info-popup')"
-                        >
+                        <div class="teacher-card">
                             <div class="teacher-card-photo">
                                 <img
                                     src="./images/patrick.png"
@@ -376,10 +367,7 @@
                             </p>
                             <p class="teacher-card-country">United States</p>
                         </div>
-                        <div
-                            class="teacher-card"
-                            onclick="show('teacher-info-popup')"
-                        >
+                        <div class="teacher-card">
                             <div class="teacher-card-photo">
                                 <img
                                     src="./images/patrick.png"
@@ -391,10 +379,7 @@
                             </p>
                             <p class="teacher-card-country">United States</p>
                         </div>
-                        <div
-                            class="teacher-card"
-                            onclick="show('teacher-info-popup')"
-                        >
+                        <div class="teacher-card">
                             <div class="teacher-card-photo">
                                 <img
                                     src="./images/patrick.png"
@@ -467,188 +452,211 @@
         </footer>
 
         <!-- Add Teacher Popup -->
-        <dialog id="add-teacher-popup" class="add-teacher-popup popup">
-            <div class="popup-header">
-                <h3>Add Teacher</h3>
-                <img
-                    id="close-add-teacher-button"
-                    class="close-popup-button"
-                    src="images/cross.png"
-                    alt="Close"
-                />
-            </div>
+        <dialog id="add-teacher-popup">
+            <div class="add-teacher-popup popup">
+                <div class="popup-header">
+                    <h3>Add Teacher</h3>
+                    <img
+                        id="close-add-teacher-button"
+                        class="close-popup-button"
+                        src="images/cross.png"
+                        alt="Close"
+                    />
+                </div>
 
-            <form class="add-teacher-form">
-                <label for="name">Name</label><br />
-                <input
-                    class="add-teacher-form-input add-teacher-form-input-margin-top add-teacher-form-input-margin-bottom"
-                    type="text"
-                    name="name"
-                    id="name"
-                    placeholder="Enter name"
-                    required
-                />
+                <form class="add-teacher-form">
+                    <div>
+                        <label for="name">Name</label>
+                        <input
+                            class="add-teacher-form-input"
+                            type="text"
+                            name="name"
+                            id="name"
+                            placeholder="Enter name"
+                            required
+                        />
+                    </div>
 
-                <label for="speciality">Speciality</label><br />
-                <select
-                    class="add-teacher-form-input add-teacher-form-input-margin-top add-teacher-form-input-margin-bottom"
-                    name="speciality"
-                    id="speciality"
-                >
-                    <option value="Mathematics">Mathematics</option>
-                    <option value="Chemistry">Chemistry</option>
-                    <option value="Art">Art</option>
-                    <option value="English">English</option>
-                    <option value="Biology">Biology</option>
-                </select>
-
-                <div
-                    class="form-row-with-two-fields add-teacher-form-input-margin-bottom"
-                >
-                    <div class="form-row-field">
-                        <label for="country">Country</label><br />
+                    <div>
+                        <label for="speciality">Speciality</label>
                         <select
-                            class="add-teacher-form-input add-teacher-form-input-margin-top"
-                            name="country"
-                            id="country"
+                            class="add-teacher-form-input"
+                            name="speciality"
+                            id="speciality"
                         >
-                            <option value="Ukraine">Ukraine</option>
-                            <option value="Germany">Germany</option>
-                            <option value="Spain">Spain</option>
-                            <option value="USA">USA</option>
-                            <option value="France">France</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Art">Art</option>
+                            <option value="English">English</option>
+                            <option value="Biology">Biology</option>
                         </select>
                     </div>
 
-                    <div class="form-row-field">
-                        <label for="city">City</label><br />
-                        <input
-                            class="add-teacher-form-input add-teacher-form-input-margin-top"
-                            type="text"
-                            name="city"
-                            id="city"
-                            required
-                        />
+                    <div class="form-row-with-two-fields">
+                        <div>
+                            <label for="country">Country</label>
+                            <select
+                                class="add-teacher-form-input add-teacher-form-input-margin-top"
+                                name="country"
+                                id="country"
+                            >
+                                <option value="Ukraine">Ukraine</option>
+                                <option value="Germany">Germany</option>
+                                <option value="Spain">Spain</option>
+                                <option value="USA">USA</option>
+                                <option value="France">France</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="city">City</label>
+                            <input
+                                class="add-teacher-form-input add-teacher-form-input-margin-top"
+                                type="text"
+                                name="city"
+                                id="city"
+                                required
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <div
-                    class="form-row-with-two-fields add-teacher-form-input-margin-bottom"
-                >
-                    <div class="form-row-field">
-                        <label for="email">Email</label><br />
-                        <input
-                            class="add-teacher-form-input add-teacher-form-input-margin-top"
-                            type="email"
-                            name="email"
-                            id="email"
-                            required
-                        />
+                    <div class="form-row-with-two-fields">
+                        <div>
+                            <label for="email">Email</label>
+                            <input
+                                class="add-teacher-form-input add-teacher-form-input-margin-top"
+                                type="email"
+                                name="email"
+                                id="email"
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <label for="phone_number">Phone</label>
+                            <input
+                                class="add-teacher-form-input add-teacher-form-input-margin-top"
+                                type="tel"
+                                name="phone_number"
+                                id="phone_number"
+                                required
+                            />
+                        </div>
                     </div>
 
-                    <div class="form-row-field">
-                        <label for="phone_number">Phone</label><br />
-                        <input
-                            class="add-teacher-form-input add-teacher-form-input-margin-top"
-                            type="tel"
-                            name="phone_number"
-                            id="phone_number"
-                            required
-                        />
+                    <div class="form-row-with-two-fields">
+                        <div>
+                            <label for="birth-date">Date of birth:</label>
+                            <input
+                                class="add-teacher-form-input"
+                                type="date"
+                                name="birth-date"
+                                id="birth-date"
+                                placeholder="MM/DD/YYYY"
+                                required
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <label for="birth-date">Date of birth:</label><br />
-                <div class="form-row-field">
-                    <input
-                        class="add-teacher-form-input add-teacher-form-input-margin-top add-teacher-form-input-margin-bottom"
-                        type="date"
-                        name="birth-date"
-                        id="birth-date"
-                        placeholder="MM/DD/YYYY"
-                        required
-                    />
-                </div>
+                    <div class="form-row">
+                        <label>Sex</label>
+                        <div>
+                            <label for="gender-male">Male</label>
+                            <input
+                                type="radio"
+                                name="gender"
+                                id="gender-male"
+                                value="Male"
+                                required
+                            />
+                            <label for="gender-female">Female</label>
+                            <input
+                                type="radio"
+                                name="gender"
+                                id="gender-female"
+                                value="Female"
+                                required
+                            />
+                        </div>
+                    </div>
 
-                <div class="form-row add-teacher-form-input-margin-bottom">
-                    <p>Sex</p>
-                    <label for="gender-male">Male</label>
-                    <input
-                        type="radio"
-                        name="gender"
-                        id="gender-male"
-                        value="Male"
-                        required
-                    />
-                    <label for="gender-female">Female</label>
-                    <input
-                        type="radio"
-                        name="gender"
-                        id="gender-female"
-                        value="Female"
-                        required
-                    />
-                </div>
+                    <div class="form-row">
+                        <label>Background color</label>
+                        <div>
+                            <label for="background-color">
+                                <img
+                                    src="images/color-picker.png"
+                                    alt="Color picker"
+                                />
+                            </label>
+                            <input
+                                type="color"
+                                name="background-color"
+                                id="background-color"
+                            />
+                        </div>
+                    </div>
 
-                <div class="form-row add-teacher-form-input-margin-bottom">
-                    <p>Background color</p>
-                    <label for="background-color"
-                        ><img src="images/color-picker.png" alt="Color picker"
-                    /></label>
-                    <input
-                        type="color"
-                        name="background-color"
-                        id="background-color"
-                    />
-                </div>
+                    <div>
+                        <label for="notes">Notes (optional)</label><br />
+                        <textarea
+                            class=""
+                            name="notes"
+                            id="notes"
+                            required
+                        ></textarea>
+                    </div>
 
-                <label for="notes">Notes (optional)</label><br />
-                <textarea
-                    class="add-teacher-form-input-margin-top add-teacher-form-input-margin-bottom"
-                    name="notes"
-                    id="notes"
-                    required
-                ></textarea>
-
-                <button id="add-teacher-button" type="button" class="btn">
-                    Add
-                </button>
-            </form>
+                    <button id="add-teacher-button" type="submit" class="btn">
+                        Add
+                    </button>
+                </form>
+            </div>
         </dialog>
 
         <!-- Teacher Info Popup -->
-        <dialog id="teacher-info-popup" class="teacher-info-popup popup">
-            <div class="popup-header">
-                <h3>Teacher Info</h3>
-                <img
-                    src="images/cross.png"
-                    id="close-teacher-info-button"
-                    class="close-popup-button"
-                    alt="Close"
-                />
-            </div>
-            <div class="teacher-info-details-container">
-                <div class="teacher-info-contact-details">
-                    <img src="./images/patrick.png" alt="Teacher photo" />
-                    <article>
-                        <h2>Patric Bateman</h2>
-                        <h4>Sales manager</h4>
-                        <p>NYC, United States</p>
-                        <p>24, male</p>
-                        <a href="mailto:american.psycho@gmail.com"
-                            >american.psycho@gmail.com</a
-                        >
-                        <p>071-488-9968</p>
-                    </article>
+        <dialog id="teacher-info-popup">
+            <div class="teacher-info-popup popup">
+                <div class="popup-header">
+                    <h3>Teacher Info</h3>
+                    <img
+                        src="images/cross.png"
+                        id="close-teacher-info-button"
+                        class="close-popup-button"
+                        alt="Close"
+                    />
                 </div>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Sit similique maxime quidem neque eos veritatis facere
-                    suscipit mollitia dolorum totam recusandae assumenda libero
-                    nihil omnis veniam vel, excepturi labore velit placeat sed
-                    odit sunt alias! Et quas odio vitae architecto.
-                </p>
-                <a class="teacher-info-toggle-map" href="#">toggle map</a>
+                <div class="teacher-info-details-container">
+                    <div class="teacher-info-contact-details">
+                        <img src="./images/patrick.png" alt="Teacher photo" />
+                        <article>
+                            <div class="headline">
+                                <h2>Patric Bateman</h2>
+                                <img
+                                    src="./images/star.png"
+                                    alt="Favorite"
+                                    class="favorite-icon"
+                                />
+                            </div>
+                            <h4>Sales manager</h4>
+                            <p>NYC, United States</p>
+                            <p>24, Male</p>
+                            <a href="mailto:american.psycho@gmail.com"
+                                >american.psycho@gmail.com</a
+                            >
+                            <p>+1 111 11 111</p>
+                        </article>
+                    </div>
+                    <p>
+                        Lorem ipsum dolor sit, amet consectetur adipisicing
+                        elit. Sit similique maxime quidem neque eos veritatis
+                        facere suscipit mollitia dolorum totam recusandae
+                        assumenda libero nihil omnis veniam vel, excepturi
+                        labore velit placeat sed odit sunt alias! Et quas odio
+                        vitae architecto.
+                    </p>
+                    <a class="teacher-info-toggle-map" href="#">toggle map</a>
+                </div>
             </div>
         </dialog>
 
