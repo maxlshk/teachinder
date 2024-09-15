@@ -1,10 +1,9 @@
-import * as fs from 'fs';
-import { randomUserMock, additionalUsers } from './data/FE4U-Lab2-mock.js';
 import { FormattedUser } from './typings/FormattedUser.js';
+import { RandomUser } from './typings/RandomUser.js';
 
-function formatRandomUsers(randomUsers: any[]): Partial<FormattedUser>[] {
+function formatRandomUsers(randomUsers: RandomUser[]): Partial<FormattedUser>[] {
 	return randomUsers.map((user) => ({
-		gender: user.gender,
+		gender: user.gender.toUpperCase(),
 		title: user.name.title,
 		full_name: `${user.name.first} ${user.name.last}`,
 		city: user.location.city,
@@ -30,13 +29,13 @@ function mergeUsers(
 	const uniqueUsersMap = new Map();
 
 	for (const user of combinedUsers) {
-		uniqueUsersMap.set(user.full_name, user);
+		uniqueUsersMap.set(user.email, user);
 	}
 
 	return Array.from(uniqueUsersMap.values());
 }
 
-function assignAdditionalFields(users: any[]): any[] {
+function assignAdditionalFields(users: Partial<FormattedUser>[]): FormattedUser[] {
 	const courses = [
 		'Mathematics',
 		'Physics',
@@ -55,23 +54,22 @@ function assignAdditionalFields(users: any[]): any[] {
 	return users.map((user, index) => ({
 		...user,
 		id: user.id || `user-${index + 1}`,
+		favorite: user.favorite ?? false,
 		course: user.course || courses[Math.floor(Math.random() * courses.length)],
 		bg_color: user.bg_color || '#ffffff',
-		note: user.note || '',
-	}));
+		note: user.note || 'Note not provided',
+	})) as FormattedUser[];
 }
 
-function writeToFile(filename: string, data: any): void {
-	fs.writeFileSync(`src/js/data/${filename}`, JSON.stringify(data, null, 2), 'utf8');
-	console.log(`Data has been written to ${filename}`);
+export function processUsers(randomUserMock: RandomUser[], additionalUsers: Partial<FormattedUser>[]): FormattedUser[] {
+	try {
+		const formattedRandomUsers = formatRandomUsers(randomUserMock);
+		const mergedUsers = mergeUsers(formattedRandomUsers, additionalUsers);
+		const finalUsers = assignAdditionalFields(mergedUsers);
+
+		return finalUsers;
+	} catch (error) {
+		console.error('An error occurred:', error);
+	}
+	return [];
 }
-
-export function processUsers() {
-	const formattedRandomUsers = formatRandomUsers(randomUserMock);
-	const mergedUsers = mergeUsers(formattedRandomUsers, additionalUsers as Partial<FormattedUser>[]);
-	const finalUsers = assignAdditionalFields(mergedUsers);
-
-	writeToFile('formatted_users.json', finalUsers);
-}
-
-processUsers();
