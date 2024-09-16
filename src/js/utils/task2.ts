@@ -1,4 +1,4 @@
-import { FormattedUser } from './typings/FormattedUser';
+import { FormattedUser } from '../typings/FormattedUser';
 import { CountryCode, parsePhoneNumberFromString } from 'libphonenumber-js';
 import validator from 'validator';
 import countries from 'i18n-iso-countries';

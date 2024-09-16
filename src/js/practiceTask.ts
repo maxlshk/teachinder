@@ -1,9 +1,9 @@
 import { randomUserMock, additionalUsers } from './data/FE4U-Lab2-mock';
-import { processUsers } from './task1';
-import { isValidUser } from './task2';
+import { processUsers } from './utils/task1';
+import { isValidUser } from './utils/task2';
 import { FormattedUser } from './typings/FormattedUser';
 import { RandomUser } from './typings/RandomUser';
-import { writeToFile } from './writeToFile';
+import { writeToFile } from './utils/writeToFile';
 
 const formattedUsers = processUsers(randomUserMock as RandomUser[], additionalUsers as Partial<FormattedUser>[]);
 writeToFile('formatted_users.json', formattedUsers);

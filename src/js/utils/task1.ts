@@ -1,5 +1,5 @@
-import { FormattedUser } from './typings/FormattedUser.js';
-import { RandomUser } from './typings/RandomUser.js';
+import { FormattedUser } from '../typings/FormattedUser.js';
+import { RandomUser } from '../typings/RandomUser.js';
 
 function formatRandomUsers(randomUsers: RandomUser[]): Partial<FormattedUser>[] {
 	return randomUsers.map((user) => ({
