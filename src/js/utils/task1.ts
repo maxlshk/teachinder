@@ -1,9 +1,13 @@
 import { FormattedUser } from '../typings/FormattedUser.js';
 import { RandomUser } from '../typings/RandomUser.js';
 
+function capitalizeFirstLetter(string) {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function formatRandomUsers(randomUsers: RandomUser[]): Partial<FormattedUser>[] {
 	return randomUsers.map((user) => ({
-		gender: user.gender.toUpperCase(),
+		gender: capitalizeFirstLetter(user.gender),
 		title: user.name.title,
 		full_name: `${user.name.first} ${user.name.last}`,
 		city: user.location.city,

@@ -4,7 +4,7 @@ export interface FormattedUser {
 	course: string;
 	bg_color: string;
 	note: string;
-	gender: string;
+	gender: 'Male' | 'Female';
 	title?: string;
 	full_name: string;
 	city: string;
