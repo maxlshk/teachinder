@@ -5,12 +5,7 @@ export function findPercentage(
 	users: FormattedUser[],
 	searchBy: 'full_name' | 'note' | 'age',
 	searchValue: string | number,
-	options?: {
-		matchType?: 'partial' | 'exact';
-		operator?: '>' | '<' | '>=' | '<=' | '=';
-	},
+	operator: '>' | '<' | '>=' | '<=' | '=' = '=',
 ): number {
-	const { matchType = 'partial', operator = '=' } = options || {};
-
-	return (findUsers(users, searchBy, searchValue, { matchType, operator }).length / users.length) * 100;
+	return (findUsers(users, searchBy, searchValue, operator).length / users.length) * 100;
 }

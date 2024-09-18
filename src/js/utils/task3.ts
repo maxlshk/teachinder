@@ -6,10 +6,6 @@ export function filterUsers(users: FormattedUser[], filters: UserFilters): Forma
 		Object.entries(filters).every(([key, value]) => {
 			const userValue = user[key as keyof FormattedUser];
 
-			if (userValue === undefined) {
-				return false;
-			}
-
 			if (typeof value === 'string' && typeof userValue === 'string') {
 				return userValue.toLowerCase() === value.toLowerCase();
 			}
