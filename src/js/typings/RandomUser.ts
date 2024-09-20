@@ -1,5 +1,5 @@
 export interface RandomUser {
-	gender: 'male' | 'female';
+	gender: 'Male' | 'Female';
 	name: {
 		title: string;
 		first: string;

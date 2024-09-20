@@ -7,7 +7,7 @@ function capitalizeFirstLetter(string) {
 
 function formatRandomUsers(randomUsers: RandomUser[]): Partial<FormattedUser>[] {
 	return randomUsers.map((user) => ({
-		gender: capitalizeFirstLetter(user.gender),
+		gender: user.gender,
 		title: user.name.title,
 		full_name: `${user.name.first} ${user.name.last}`,
 		city: user.location.city,
@@ -57,6 +57,7 @@ function assignAdditionalFields(users: Partial<FormattedUser>[]): FormattedUser[
 
 	return users.map((user, index) => ({
 		...user,
+		gender: capitalizeFirstLetter(user.gender),
 		id: user.id || `user-${index + 1}`,
 		favorite: user.favorite ?? false,
 		course: user.course || courses[Math.floor(Math.random() * courses.length)],

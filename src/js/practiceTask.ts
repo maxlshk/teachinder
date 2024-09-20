@@ -11,7 +11,7 @@ import { findPercentage } from './utils/task6';
 
 const filters = {
 	country: 'Finland',
-	age: 36,
+	age: { min: 20, max: 30 },
 	favorite: false,
 };
 
