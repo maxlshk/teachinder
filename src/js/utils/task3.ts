@@ -23,7 +23,7 @@ export function filterUsers(users: FormattedUser[], filters: UserFilters): Forma
 			}
 
 			if (typeof value === 'string' && typeof userValue === 'string') {
-				return userValue.toLowerCase() === value.toLowerCase();
+				return userValue.toLocaleLowerCase() === value.toLocaleLowerCase();
 			}
 
 			return userValue === value;

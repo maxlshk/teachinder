@@ -22,7 +22,7 @@ export function findUsers(
 		const userValue = user[searchBy];
 
 		if (typeof userValue === 'string' && typeof searchValue === 'string') {
-			return userValue.toLowerCase() === searchValue.toLowerCase();
+			return userValue.toLocaleLowerCase() === searchValue.toLocaleLowerCase();
 		}
 
 		if (typeof userValue === 'number' && typeof searchValue === 'number') {
