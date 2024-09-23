@@ -58,7 +58,7 @@ function assignAdditionalFields(users: Partial<FormattedUser>[]): FormattedUser[
 	return users.map((user, index) => ({
 		...user,
 		gender: capitalizeFirstLetter(user.gender),
-		id: user.id || `user-${index + 1}`,
+		// id: user.id || `user-${index + 1}`,
 		favorite: user.favorite ?? false,
 		course: user.course || courses[Math.floor(Math.random() * courses.length)],
 		bg_color: user.bg_color || '#ffffff',

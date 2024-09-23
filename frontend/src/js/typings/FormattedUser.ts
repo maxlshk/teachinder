@@ -1,5 +1,5 @@
 export interface FormattedUser {
-	id: string;
+	// id: string;
 	favorite: boolean;
 	course: string;
 	bg_color: string;
@@ -21,6 +21,6 @@ export interface FormattedUser {
 	picture_thumbnail?: string;
 }
 
-// export interface UserResponse extends FormattedUser {
-// 	_id: string;
-// }
+export interface StoredUser extends FormattedUser {
+	_id: string;
+}

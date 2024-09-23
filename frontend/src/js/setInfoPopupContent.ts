@@ -1,23 +1,23 @@
-import { FormattedUser } from './typings/FormattedUser';
+import { FormattedUser, StoredUser } from './typings/FormattedUser';
 
-export function setInfoPopupContent(user: FormattedUser, teacherInfoPopup: HTMLDialogElement): void {
+export function setInfoPopupContent(user: StoredUser, teacherInfoPopup: HTMLDialogElement): void {
 	const container = document.getElementById('info-popup-body');
 	const closeTeacherInfoPopupBtn = document.getElementById('close-teacher-info-button') as HTMLButtonElement;
 
 	function hideTeacherInfoPopup() {
-		// const requestOptions = {
-		// 	method: 'PUT',
-		// 	headers: { 'Content-Type': 'application/json' },
-		// 	body: JSON.stringify({ userId: user._id, favorite: user.favorite }),
-		// };
+		const requestOptions = {
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ userId: user._id, favorite: user.favorite }),
+		};
 
-		// fetch('http://localhost:3030/api/user/favorite', requestOptions).then((response) => {
-		// 	if (response.ok) {
-
-		// 	} else {
-		// 		console.error('Failed to update user favorite status');
-		// 	}
-		// });
+		fetch('http://localhost:3030/api/user/favorite', requestOptions).then((response) => {
+			if (response.ok) {
+				console.log('User favorite status updated');
+			} else {
+				console.error('Failed to update user favorite status');
+			}
+		});
 
 		closeTeacherInfoPopupBtn.removeEventListener('click', hideTeacherInfoPopup);
 		teacherInfoPopup.close();
@@ -67,14 +67,14 @@ export function setInfoPopupContent(user: FormattedUser, teacherInfoPopup: HTMLD
 	favoriteButton?.addEventListener('click', () => {
 		user.favorite = !user.favorite;
 		const favoritesContainer = document.getElementById('favorites-slider-container');
-		const userCardFavorite = document.getElementById(`favorite-${user.id}`);
-		const userCard = document.getElementById(user.id.toString());
+		const userCardFavorite = document.getElementById(`favorite-${user._id}`);
+		const userCard = document.getElementById(user._id.toString());
 
 		if (user.favorite) {
 			favoriteButton.src = './images/star.png';
 			favoriteButton.alt = 'Favorite';
 			const favoriteCard = userCard?.cloneNode(true) as HTMLDivElement;
-			favoriteCard.id = `favorite-${user.id}`;
+			favoriteCard.id = `favorite-${user._id}`;
 			favoritesContainer.appendChild(favoriteCard);
 		} else {
 			favoriteButton.src = './images/star_outline.png';

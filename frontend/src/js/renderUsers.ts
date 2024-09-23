@@ -1,6 +1,6 @@
-import { FormattedUser } from './typings/FormattedUser';
+import { StoredUser } from './typings/FormattedUser';
 
-export function renderUsers(users: FormattedUser[]): void {
+export function renderUsers(users: StoredUser[]): void {
 	const container = document.getElementById('teachers-grid');
 	const favoritesContainer = document.getElementById('favorites-slider-container');
 
@@ -12,32 +12,39 @@ export function renderUsers(users: FormattedUser[]): void {
 	container.innerHTML = '';
 	favoritesContainer.innerHTML = '';
 
+	const teachersFragment = document.createDocumentFragment();
+	const favoritesFragment = document.createDocumentFragment();
+
 	users.forEach((user) => {
 		const userElement = document.createElement('div');
-		userElement.classList.add(`teacher-card`);
-		userElement.id = user.id.toString();
+		userElement.classList.add('teacher-card');
+		userElement.id = user._id.toString();
 
 		userElement.innerHTML = `
-      	<div class="teacher-card-photo">
-			${
-				user.picture_large
-					? `<img src="${user.picture_large}" alt="Teacher photo" />`
-					: `<div><span>${user.full_name
-							.split(' ')
-							.map((s) => s.charAt(0))
-							.join('.')}</span></div>`
-			}
-		</div>
-      	<p class="teacher-card-full-name">${user.full_name}</p>
-		<p class="teacher-card-country">${user.country}</p>
-    `;
+			<div class="teacher-card-photo">
+				${
+					user.picture_large
+						? `<img src="${user.picture_large}" alt="Teacher photo" />`
+						: `<div><span>${user.full_name
+								.split(' ')
+								.map((s) => s.charAt(0))
+								.join('.')}</span></div>`
+				}
+			</div>
+			<p class="teacher-card-full-name">${user.full_name}</p>
+			<p class="teacher-card-country">${user.country}</p>
+		`;
 
 		if (user.favorite) {
 			const favoritesCard = userElement.cloneNode(true) as HTMLDivElement;
-			favoritesCard.id = `favorite-${user.id}`;
-			favoritesContainer?.appendChild(favoritesCard);
+			favoritesCard.id = `favorite-${user._id}`;
+			favoritesFragment.appendChild(favoritesCard);
 			userElement.classList.add('favorite');
 		}
-		container.appendChild(userElement);
+
+		teachersFragment.appendChild(userElement);
 	});
+
+	container.appendChild(teachersFragment);
+	favoritesContainer.appendChild(favoritesFragment);
 }

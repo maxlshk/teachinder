@@ -15,28 +15,25 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const uri = process.env.MONGO_URI || ''; // Get the URI from the .env file
+const uri = process.env.MONGO_URI || '';
 const client = new MongoClient(uri);
 
-// Connect to MongoDB
 async function connectToDatabase() {
   try {
     await client.connect();
     console.log('Connected to MongoDB successfully');
 
-    // Get your database if needed
-    const db = client.db('TeachinderDB'); // Replace 'myDatabase' with your actual DB name
+    const db = client.db('TeachinderDB');
     initDB(db);
   } catch (error) {
     console.error('Failed to connect to MongoDB', error);
-    process.exit(1); // Exit if connection fails
+    process.exit(1);
   }
 }
 
 router.init();
 
-// Start the server after database connection is established
 app.listen(port, async () => {
-  await connectToDatabase(); // Connect to the DB before starting the app
+  await connectToDatabase();
   console.log(`Now listening on port ${port}`);
 });

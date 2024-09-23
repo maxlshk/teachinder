@@ -1,7 +1,7 @@
 import { setInfoPopupContent } from './setInfoPopupContent';
-import { FormattedUser } from './typings/FormattedUser';
+import { FormattedUser, StoredUser } from './typings/FormattedUser';
 
-export function setUpButtons(users: FormattedUser[]): void {
+export function setUpButtons(users: StoredUser[]): void {
 	const addTeacherBtns = document.querySelectorAll(
 		'.btn[data-target="add-teacher-popup"]',
 	) as NodeListOf<HTMLButtonElement>;
@@ -36,7 +36,7 @@ export function setUpButtons(users: FormattedUser[]): void {
 
 	function showTeacherInfoPopup(id: string) {
 		console.log(id);
-		const teacher = users.find((user) => user.id.toString() === id);
+		const teacher = users.find((user) => user._id.toString() === id);
 		console.log(teacher);
 		setInfoPopupContent(teacher, teacherInfoPopup);
 

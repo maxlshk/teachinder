@@ -15,20 +15,20 @@ const filters = {
 	favorite: false,
 };
 
-const formattedUsers = processUsers(randomUserMock as RandomUser[], additionalUsers as Partial<FormattedUser>[]);
-writeToFile('formatted_users.json', formattedUsers);
+// const formattedUsers = processUsers(randomUserMock as RandomUser[], additionalUsers as Partial<FormattedUser>[]);
+// writeToFile('formatted_users.json', formattedUsers);
 
-const validUsers = formattedUsers.filter(isValidUser);
-writeToFile('valid_users.json', validUsers);
+// const validUsers = formattedUsers.filter(isValidUser);
+// writeToFile('valid_users.json', validUsers);
 
-const filteredUsers = filterUsers(validUsers, filters);
-writeToFile('filtered_users.json', filteredUsers);
+// const filteredUsers = filterUsers(validUsers, filters);
+// writeToFile('filtered_users.json', filteredUsers);
 
-const sortedUsers = sortUsers(validUsers, 'age', 'asc');
-writeToFile('sorted_users.json', sortedUsers);
+// const sortedUsers = sortUsers(validUsers, 'age', 'asc');
+// writeToFile('sorted_users.json', sortedUsers);
 
-const foundUsers = findUsers(validUsers, 'age', 30, '<=');
-writeToFile('found_users.json', foundUsers);
+// const foundUsers = findUsers(validUsers, 'age', 30, '<=');
+// writeToFile('found_users.json', foundUsers);
 
-const percentage = findPercentage(validUsers, 'age', 30, '<=');
-writeToFile('percentage.json', percentage);
+// const percentage = findPercentage(validUsers, 'age', 30, '<=');
+// writeToFile('percentage.json', percentage);

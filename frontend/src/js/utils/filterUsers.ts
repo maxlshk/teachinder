@@ -1,7 +1,7 @@
-import { FormattedUser } from '../typings/FormattedUser';
+import { FormattedUser, StoredUser } from '../typings/FormattedUser';
 import { UserFilters } from '../typings/UserFilters';
 
-export function filterUsers(users: FormattedUser[], filters: UserFilters): FormattedUser[] {
+export function filterUsers(users: StoredUser[], filters: UserFilters): StoredUser[] {
 	return users.filter((user) =>
 		Object.entries(filters).every(([key, value]) => {
 			const userValue = user[key];
