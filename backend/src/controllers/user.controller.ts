@@ -1,16 +1,12 @@
 import { Request, Response } from 'express';
-import { MongoClient, Db, ObjectId } from 'mongodb';
+import { Db, ObjectId } from 'mongodb';
 
-// You should import the connected MongoDB client and database here,
-// or pass it as a parameter to this controller if needed.
 let db: Db;
 
-// Initialize the database connection here (or in your app startup)
 export const initDB = (database: Db) => {
   db = database;
 };
 
-// Controller to get users
 export const getUsers = async (_req: Request, res: Response): Promise<void> => {
   try {
     const users = await db.collection('users').find().toArray();
@@ -21,7 +17,6 @@ export const getUsers = async (_req: Request, res: Response): Promise<void> => {
   }
 };
 
-// Controller to create a new user
 export const postUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const newUser = req.body;
@@ -35,7 +30,19 @@ export const postUser = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// Controller to update favorite status of a user
+export const fillUsers = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const users = req.body.users;
+    const result = await db.collection('users').insertMany(users);
+    res
+      .status(201)
+      .json({ message: 'Users created', userIds: result.insertedIds });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error creating users' });
+  }
+};
+
 export const makeFavorite = async (
   req: Request,
   res: Response

@@ -1,20 +1,21 @@
-import { FormattedUser } from './typings/FormattedUser';
+import { FormattedUser, UserResponse } from './typings/FormattedUser';
 
-export function renderUsers(users: FormattedUser[]): void {
+export function renderUsers(users: UserResponse[]): void {
 	const container = document.getElementById('teachers-grid');
+	const favoritesContainer = document.getElementById('favorites-slider-container');
 
-	if (!container) {
+	if (!container || !favoritesContainer) {
 		console.error('Container not found');
 		return;
 	}
 
 	container.innerHTML = '';
+	favoritesContainer.innerHTML = '';
 
 	users.forEach((user) => {
 		const userElement = document.createElement('div');
 		userElement.classList.add(`teacher-card`);
-		userElement.id = user.id.toString();
-		user.favorite ? userElement.classList.add('favorite') : null;
+		userElement.id = user._id.toString();
 
 		userElement.innerHTML = `
       	<div class="teacher-card-photo">
@@ -31,6 +32,12 @@ export function renderUsers(users: FormattedUser[]): void {
 		<p class="teacher-card-country">${user.country}</p>
     `;
 
+		if (user.favorite) {
+			const favoritesCard = userElement.cloneNode(true) as HTMLDivElement;
+			favoritesCard.id = `favorite-${user._id}`;
+			favoritesContainer?.appendChild(favoritesCard);
+			userElement.classList.add('favorite');
+		}
 		container.appendChild(userElement);
 	});
 }

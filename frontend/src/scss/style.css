@@ -392,16 +392,19 @@ th:hover .statistics-table-head-arrow {
   gap: 2rem;
   justify-content: space-between;
   align-items: center;
+  scrollbar-width: none;
 }
 .favorites-slider-grid {
   display: flex;
   flex-grow: 1;
   gap: 4rem;
   overflow-x: auto;
+  scrollbar-width: none;
 }
 
 .arrow {
   opacity: 0.5;
+  cursor: pointer;
 }
 .arrow:hover {
   opacity: 1;

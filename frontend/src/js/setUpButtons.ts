@@ -1,13 +1,12 @@
 import { setInfoPopupContent } from './setInfoPopupContent';
-import { FormattedUser } from './typings/FormattedUser';
+import { FormattedUser, UserResponse } from './typings/FormattedUser';
 
-export function setUpButtons(users: FormattedUser[]): void {
+export function setUpButtons(users: UserResponse[]): void {
 	const addTeacherBtns = document.querySelectorAll(
 		'.btn[data-target="add-teacher-popup"]',
 	) as NodeListOf<HTMLButtonElement>;
 	const teacherCards = document.querySelectorAll('.teacher-card');
 	const closeAddTeacherPopupBtn = document.getElementById('close-add-teacher-button') as HTMLButtonElement;
-	const closeTeacherInfoPopupBtn = document.getElementById('close-teacher-info-button') as HTMLButtonElement;
 	const addTeacherPopup = document.getElementById('add-teacher-popup') as HTMLDialogElement;
 	const teacherInfoPopup = document.getElementById('teacher-info-popup') as HTMLDialogElement;
 	const confirmAddBtn = document.getElementById('add-teacher-button') as HTMLButtonElement;
@@ -18,9 +17,9 @@ export function setUpButtons(users: FormattedUser[]): void {
 
 	function showTeacherInfoPopup(id: string) {
 		console.log(id);
-		const teacher = users.find((user) => user.id.toString() === id);
+		const teacher = users.find((user) => user._id.toString() === id);
 		console.log(teacher);
-		setInfoPopupContent(teacher);
+		setInfoPopupContent(teacher, teacherInfoPopup);
 
 		teacherInfoPopup.showModal();
 	}
@@ -29,21 +28,17 @@ export function setUpButtons(users: FormattedUser[]): void {
 		addTeacherPopup.close();
 	}
 
-	function hideTeacherInfoPopup() {
-		teacherInfoPopup.close();
-	}
-
 	addTeacherBtns.forEach((button) => {
 		button.addEventListener('click', showAddTeacherPopup);
 	});
 
 	teacherCards.forEach((card) => {
-		card.addEventListener('click', () => showTeacherInfoPopup(card.id));
+		card.addEventListener('click', () =>
+			showTeacherInfoPopup(card.id.startsWith('favorite-') ? card.id.slice(9) : card.id),
+		);
 	});
 
 	closeAddTeacherPopupBtn.addEventListener('click', hideAddTeacherPopup);
-
-	closeTeacherInfoPopupBtn.addEventListener('click', hideTeacherInfoPopup);
 
 	confirmAddBtn.addEventListener('click', () => {
 		hideAddTeacherPopup();

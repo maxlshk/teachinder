@@ -7,6 +7,8 @@ router.get('/all', userController.getUsers);
 
 router.post('/new', userController.postUser);
 
+router.post('/fill', userController.fillUsers);
+
 router.put('/favorite', userController.makeFavorite);
 
 export default router;
