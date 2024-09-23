@@ -6,6 +6,10 @@ export function filterUsers(users: FormattedUser[], filters: UserFilters): Forma
 		Object.entries(filters).every(([key, value]) => {
 			const userValue = user[key];
 
+			if (value === undefined) {
+				return true;
+			}
+
 			if (key === 'age') {
 				if (typeof value === 'number') {
 					return userValue === value;
@@ -24,6 +28,10 @@ export function filterUsers(users: FormattedUser[], filters: UserFilters): Forma
 
 			if (typeof value === 'string' && typeof userValue === 'string') {
 				return userValue.toLocaleLowerCase() === value.toLocaleLowerCase();
+			}
+
+			if (typeof value === 'boolean') {
+				return !!userValue;
 			}
 
 			return userValue === value;

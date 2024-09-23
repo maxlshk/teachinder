@@ -21,6 +21,6 @@ export interface FormattedUser {
 	picture_thumbnail?: string;
 }
 
-export interface UserResponse extends FormattedUser {
-	_id: string;
-}
+// export interface UserResponse extends FormattedUser {
+// 	_id: string;
+// }

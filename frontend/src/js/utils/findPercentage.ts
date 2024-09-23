@@ -1,5 +1,5 @@
 import { FormattedUser } from '../typings/FormattedUser';
-import { findUsers } from './task5';
+import { findUsers } from './findUsers';
 
 export function findPercentage(
 	users: FormattedUser[],

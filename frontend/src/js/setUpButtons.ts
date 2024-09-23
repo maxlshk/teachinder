@@ -1,15 +1,34 @@
 import { setInfoPopupContent } from './setInfoPopupContent';
-import { FormattedUser, UserResponse } from './typings/FormattedUser';
+import { FormattedUser } from './typings/FormattedUser';
 
-export function setUpButtons(users: UserResponse[]): void {
+export function setUpButtons(users: FormattedUser[]): void {
 	const addTeacherBtns = document.querySelectorAll(
 		'.btn[data-target="add-teacher-popup"]',
 	) as NodeListOf<HTMLButtonElement>;
-	const teacherCards = document.querySelectorAll('.teacher-card');
+	const teachersGrid = document.getElementById('teachers-grid');
+	const favoriteTeachersSlider = document.getElementById('favorites-slider-container');
 	const closeAddTeacherPopupBtn = document.getElementById('close-add-teacher-button') as HTMLButtonElement;
 	const addTeacherPopup = document.getElementById('add-teacher-popup') as HTMLDialogElement;
 	const teacherInfoPopup = document.getElementById('teacher-info-popup') as HTMLDialogElement;
 	const confirmAddBtn = document.getElementById('add-teacher-button') as HTMLButtonElement;
+
+	const leftArrow = document.getElementById('left-arrow');
+	const rightArrow = document.getElementById('right-arrow');
+	const scrollContainer = document.getElementById('favorites-slider-container');
+
+	leftArrow.addEventListener('click', () => {
+		scrollContainer.scrollBy({
+			left: -210,
+			behavior: 'smooth',
+		});
+	});
+
+	rightArrow.addEventListener('click', () => {
+		scrollContainer.scrollBy({
+			left: 210,
+			behavior: 'smooth',
+		});
+	});
 
 	function showAddTeacherPopup() {
 		addTeacherPopup.showModal();
@@ -17,7 +36,7 @@ export function setUpButtons(users: UserResponse[]): void {
 
 	function showTeacherInfoPopup(id: string) {
 		console.log(id);
-		const teacher = users.find((user) => user._id.toString() === id);
+		const teacher = users.find((user) => user.id.toString() === id);
 		console.log(teacher);
 		setInfoPopupContent(teacher, teacherInfoPopup);
 
@@ -32,10 +51,26 @@ export function setUpButtons(users: UserResponse[]): void {
 		button.addEventListener('click', showAddTeacherPopup);
 	});
 
-	teacherCards.forEach((card) => {
-		card.addEventListener('click', () =>
-			showTeacherInfoPopup(card.id.startsWith('favorite-') ? card.id.slice(9) : card.id),
-		);
+	teachersGrid.addEventListener('click', (event) => {
+		const target = event.target as HTMLElement;
+
+		const teacherCard = target.closest('.teacher-card');
+
+		if (teacherCard) {
+			const id = teacherCard.id;
+			showTeacherInfoPopup(id);
+		}
+	});
+
+	favoriteTeachersSlider.addEventListener('click', (event) => {
+		const target = event.target as HTMLElement;
+
+		const teacherCard = target.closest('.teacher-card');
+
+		if (teacherCard) {
+			const id = teacherCard.id.slice(9);
+			showTeacherInfoPopup(id);
+		}
 	});
 
 	closeAddTeacherPopupBtn.addEventListener('click', hideAddTeacherPopup);

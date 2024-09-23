@@ -53,10 +53,11 @@
 			<section id="teachers" class="container section">
 				<h2 class="section-title">Top Teachers</h2>
 
-				<div class="teachers-filters">
+				<div class="teachers-filters" id="filters-form">
 					<div class="teacher-filter">
-						<label for="age">Age</label>
-						<select id="age" name="age">
+						<label for="age-filter">Age</label>
+						<select id="age-filter" name="age-filter">
+							<option value="">Select</option>
 							<option value="18-31">18-31</option>
 							<option value="32-50">32-50</option>
 							<option value="51-62">51-62</option>
@@ -66,26 +67,29 @@
 					</div>
 
 					<div class="teacher-filter">
-						<label for="region">Region</label>
-						<select id="region" name="region">
+						<label for="region-filter">Region</label>
+						<select id="region-filter" name="region-filter">
+							<option value="">Select</option>
 							<option value="Europe">Europe</option>
 							<option value="America">North America</option>
 							<option value="Asia">Asia</option>
 							<option value="Africa">Africa</option>
+							<option value="France">France</option>
 						</select>
 					</div>
 
 					<div class="teacher-filter">
-						<label for="sex">Sex</label>
-						<select id="sex" name="sex">
+						<label for="gender-filter">Sex</label>
+						<select id="gender-filter" name="gender-filter">
+							<option value="">Select</option>
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
 						</select>
 					</div>
 
 					<div class="teacher-filter">
-						<input type="checkbox" id="photo" name="photo" />
-						<label for="photo">Only with photo</label>
+						<input type="checkbox" id="with-photo-only" name="with-photo-only" />
+						<label for="with-photo-only">Only with photo</label>
 					</div>
 
 					<div class="teacher-filter">
@@ -94,7 +98,9 @@
 					</div>
 				</div>
 
-				<div class="teachers-grid" id="teachers-grid"></div>
+				<div class="teachers-grid" id="teachers-grid">
+					<!--TEACHERS-->
+				</div>
 			</section>
 
 			<!-- Statistics -->

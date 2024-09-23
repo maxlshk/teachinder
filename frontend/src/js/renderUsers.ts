@@ -1,6 +1,6 @@
-import { FormattedUser, UserResponse } from './typings/FormattedUser';
+import { FormattedUser } from './typings/FormattedUser';
 
-export function renderUsers(users: UserResponse[]): void {
+export function renderUsers(users: FormattedUser[]): void {
 	const container = document.getElementById('teachers-grid');
 	const favoritesContainer = document.getElementById('favorites-slider-container');
 
@@ -15,7 +15,7 @@ export function renderUsers(users: UserResponse[]): void {
 	users.forEach((user) => {
 		const userElement = document.createElement('div');
 		userElement.classList.add(`teacher-card`);
-		userElement.id = user._id.toString();
+		userElement.id = user.id.toString();
 
 		userElement.innerHTML = `
       	<div class="teacher-card-photo">
@@ -34,7 +34,7 @@ export function renderUsers(users: UserResponse[]): void {
 
 		if (user.favorite) {
 			const favoritesCard = userElement.cloneNode(true) as HTMLDivElement;
-			favoritesCard.id = `favorite-${user._id}`;
+			favoritesCard.id = `favorite-${user.id}`;
 			favoritesContainer?.appendChild(favoritesCard);
 			userElement.classList.add('favorite');
 		}

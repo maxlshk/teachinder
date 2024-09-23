@@ -1,13 +1,13 @@
 import { randomUserMock, additionalUsers } from './data/FE4U-Lab2-mock';
-import { processUsers } from './utils/task1';
-import { isValidUser } from './utils/task2';
+import { processUsers } from './utils/formatUsers';
+import { isValidUser } from './utils/validateUsers';
 import { FormattedUser } from './typings/FormattedUser';
 import { RandomUser } from './typings/RandomUser';
 import { writeToFile } from './utils/writeToFile';
-import { filterUsers } from './utils/task3';
-import { sortUsers } from './utils/task4';
-import { findUsers } from './utils/task5';
-import { findPercentage } from './utils/task6';
+import { filterUsers } from './utils/filterUsers';
+import { sortUsers } from './utils/sortUsers';
+import { findUsers } from './utils/findUsers';
+import { findPercentage } from './utils/findPercentage';
 
 const filters = {
 	country: 'Finland',

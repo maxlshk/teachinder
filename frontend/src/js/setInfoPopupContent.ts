@@ -1,38 +1,23 @@
-import { UserResponse } from './typings/FormattedUser';
+import { FormattedUser } from './typings/FormattedUser';
 
-export function setInfoPopupContent(user: UserResponse, teacherInfoPopup: HTMLDialogElement): void {
+export function setInfoPopupContent(user: FormattedUser, teacherInfoPopup: HTMLDialogElement): void {
 	const container = document.getElementById('info-popup-body');
 	const closeTeacherInfoPopupBtn = document.getElementById('close-teacher-info-button') as HTMLButtonElement;
 
 	function hideTeacherInfoPopup() {
-		const userCard = document.getElementById(user._id.toString());
-		const favoritesContainer = document.getElementById('favorites-slider-container');
-		if (!favoritesContainer) {
-			console.error('Favorites container not found');
-			return;
-		}
-		const requestOptions = {
-			method: 'PUT',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ userId: user._id, favorite: user.favorite }),
-		};
+		// const requestOptions = {
+		// 	method: 'PUT',
+		// 	headers: { 'Content-Type': 'application/json' },
+		// 	body: JSON.stringify({ userId: user._id, favorite: user.favorite }),
+		// };
 
-		fetch('http://localhost:3030/api/user/favorite', requestOptions).then((response) => {
-			if (response.ok) {
-				const userCardFavorite = document.getElementById(`favorite-${user._id}`);
-				if (favoritesContainer.contains(userCardFavorite)) {
-					favoritesContainer.removeChild(userCardFavorite);
-				} else {
-					const favoriteCard = userCard?.cloneNode(true) as HTMLDivElement;
-					favoriteCard.id = `favorite-${user._id}`;
-					favoritesContainer.appendChild(favoriteCard);
-				}
+		// fetch('http://localhost:3030/api/user/favorite', requestOptions).then((response) => {
+		// 	if (response.ok) {
 
-				userCard?.classList.toggle('favorite');
-			} else {
-				console.error('Failed to update user favorite status');
-			}
-		});
+		// 	} else {
+		// 		console.error('Failed to update user favorite status');
+		// 	}
+		// });
 
 		closeTeacherInfoPopupBtn.removeEventListener('click', hideTeacherInfoPopup);
 		teacherInfoPopup.close();
@@ -79,16 +64,23 @@ export function setInfoPopupContent(user: UserResponse, teacherInfoPopup: HTMLDi
 	container.appendChild(mapLink);
 
 	const favoriteButton = document.getElementById('favorite-button') as HTMLImageElement;
-	console.log(favoriteButton);
 	favoriteButton?.addEventListener('click', () => {
 		user.favorite = !user.favorite;
+		const favoritesContainer = document.getElementById('favorites-slider-container');
+		const userCardFavorite = document.getElementById(`favorite-${user.id}`);
+		const userCard = document.getElementById(user.id.toString());
 
 		if (user.favorite) {
 			favoriteButton.src = './images/star.png';
 			favoriteButton.alt = 'Favorite';
+			const favoriteCard = userCard?.cloneNode(true) as HTMLDivElement;
+			favoriteCard.id = `favorite-${user.id}`;
+			favoritesContainer.appendChild(favoriteCard);
 		} else {
 			favoriteButton.src = './images/star_outline.png';
 			favoriteButton.alt = 'Not Favorite';
+			favoritesContainer.removeChild(userCardFavorite);
 		}
+		userCard?.classList.toggle('favorite');
 	});
 }
