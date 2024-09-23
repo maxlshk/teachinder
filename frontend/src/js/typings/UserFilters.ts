@@ -1,4 +1,4 @@
-import { FormattedUser } from '../typings/FormattedUser';
+import { FormattedUser } from './FormattedUser';
 
 export interface UserFilters extends Partial<Pick<FormattedUser, 'country' | 'gender' | 'favorite'>> {
 	age?: number | { min?: number; max?: number };
