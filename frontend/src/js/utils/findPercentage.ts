@@ -1,11 +1,11 @@
-import { FormattedUser } from '../typings/FormattedUser';
+import { FormattedUser, StoredUser } from '../typings/FormattedUser';
 import { findUsers } from './findUsers';
 
 export function findPercentage(
-	users: FormattedUser[],
+	users: StoredUser[],
 	searchBy: 'full_name' | 'note' | 'age',
 	searchValue: string | number,
 	operator: '>' | '<' | '>=' | '<=' | '=' = '=',
 ): number {
-	return (findUsers(users, searchBy, searchValue, operator).length / users.length) * 100;
+	return (findUsers(users, searchBy).length / users.length) * 100;
 }
