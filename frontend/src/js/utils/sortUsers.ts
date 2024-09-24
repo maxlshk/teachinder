@@ -1,11 +1,11 @@
-import { FormattedUser } from '../typings/FormattedUser';
+import { StoredUser } from '../typings/FormattedUser';
 import { SortingUserFilters } from '../typings/UserFilters';
 
 export function sortUsers(
-	users: FormattedUser[],
+	users: StoredUser[],
 	sortBy: keyof SortingUserFilters,
 	order: 'asc' | 'desc' = 'asc',
-): FormattedUser[] {
+): StoredUser[] {
 	const usersCopy = [...users];
 
 	usersCopy.sort((a, b) => {
@@ -16,10 +16,10 @@ export function sortUsers(
 			return 0;
 		}
 
-		if (sortBy === 'b_day') {
-			valueA = new Date(valueA).getTime();
-			valueB = new Date(valueB).getTime();
-		}
+		// if (sortBy === 'b_day') {
+		// 	valueA = new Date(valueA).getTime();
+		// 	valueB = new Date(valueB).getTime();
+		// }
 
 		if (typeof valueA === 'number' && typeof valueB === 'number') {
 			return order === 'asc' ? valueA - valueB : valueB - valueA;

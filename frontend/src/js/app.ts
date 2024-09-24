@@ -1,18 +1,20 @@
 import { randomUserMock, additionalUsers } from './data/FE4U-Lab2-mock';
+import { renderTable } from './renderTable';
 import { renderUsers } from './renderUsers';
 import { setUpButtons } from './setUpButtons';
 import { setUpFilters } from './setUpFilters';
+import { setUpSorting } from './setUpSorting';
 import { FormattedUser, StoredUser } from './typings/FormattedUser';
 import { RandomUser } from './typings/RandomUser';
 import { filterUsers } from './utils/filterUsers';
 import { processUsers } from './utils/formatUsers';
+import { sortUsers } from './utils/sortUsers';
 import { isValidUser } from './utils/validateUsers';
 require('../css/app.css');
 
 document.addEventListener('DOMContentLoaded', async () => {
 	let users: StoredUser[] = [];
 
-	// Fetch existing users from the backend
 	try {
 		const response = await fetch(`http://localhost:3030/api/user/all`);
 		if (response.ok) {
@@ -24,7 +26,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 		console.error('Error fetching users:', error);
 	}
 
-	// If no users exist, generate and send users to the backend
 	if (users.length === 0) {
 		console.log('No users found, generating new ones');
 		const formattedUsers = processUsers(
@@ -64,7 +65,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 	renderUsers(users);
 
+	renderTable(users);
+
 	setUpButtons(users);
 
 	setUpFilters(users, filterUsers);
+
+	setUpSorting(users, sortUsers);
 });

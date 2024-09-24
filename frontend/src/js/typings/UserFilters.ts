@@ -5,4 +5,5 @@ export interface UserFilters extends Partial<Pick<FormattedUser, 'country' | 'ge
 	picture_large?: boolean;
 }
 
-export interface SortingUserFilters extends Pick<FormattedUser, 'full_name' | 'age' | 'b_day' | 'country'> {}
+export interface SortingUserFilters
+	extends Pick<FormattedUser, 'full_name' | 'age' | 'gender' | 'course' | 'country'> {}
