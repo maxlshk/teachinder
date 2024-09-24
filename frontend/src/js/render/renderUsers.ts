@@ -1,4 +1,4 @@
-import { StoredUser } from './typings/FormattedUser';
+import { StoredUser } from '../typings/FormattedUser';
 
 export function renderUsers(users: StoredUser[]): void {
 	const container = document.getElementById('teachers-grid');

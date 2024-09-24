@@ -1,4 +1,4 @@
-import { StoredUser } from './typings/FormattedUser';
+import { StoredUser } from '../typings/FormattedUser';
 
 export function renderTable(users: StoredUser[]): void {
 	const tableBody = document.getElementById('statistics-table-body');

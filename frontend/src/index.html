@@ -298,21 +298,31 @@
 						<input
 							class="add-teacher-form-input"
 							type="text"
-							name="name"
+							name="full_name"
 							id="name"
 							placeholder="Enter name"
 							required
+							minlength="4"
+							pattern="^[A-Z][a-z]+\s+[A-Z][a-z]+$"
+							title="Please enter a first and last name, each starting with a capital letter."
 						/>
 					</div>
 
 					<div>
 						<label for="speciality">Speciality</label>
-						<select class="add-teacher-form-input" name="speciality" id="speciality">
+						<select class="add-teacher-form-input" name="course" id="speciality">
 							<option value="Mathematics">Mathematics</option>
-							<option value="Chemistry">Chemistry</option>
-							<option value="Art">Art</option>
+							<option value="Physics">Physics</option>
 							<option value="English">English</option>
+							<option value="Computer Science">Computer Science</option>
+							<option value="Dancing">Dancing</option>
+							<option value="Chess">Chess</option>
 							<option value="Biology">Biology</option>
+							<option value="Chemistry">Chemistry</option>
+							<option value="Law">Law</option>
+							<option value="Art">Art</option>
+							<option value="Medicine">Medicine</option>
+							<option value="Statistics">Statistics</option>
 						</select>
 					</div>
 
@@ -340,6 +350,9 @@
 								name="city"
 								id="city"
 								required
+								minlength="3"
+								pattern="^[A-Z][a-z]*(\s+[A-Z][a-z]*)*$"
+								title="City name should start with a capital letter"
 							/>
 						</div>
 					</div>
@@ -353,6 +366,8 @@
 								name="email"
 								id="email"
 								required
+								minlength="6"
+								pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
 							/>
 						</div>
 
@@ -361,9 +376,10 @@
 							<input
 								class="add-teacher-form-input add-teacher-form-input-margin-top"
 								type="tel"
-								name="phone_number"
+								name="phone"
 								id="phone_number"
 								required
+								pattern="[0-9]{10}"
 							/>
 						</div>
 					</div>
@@ -374,7 +390,7 @@
 							<input
 								class="add-teacher-form-input"
 								type="date"
-								name="birth-date"
+								name="b_day"
 								id="birth-date"
 								placeholder="MM/DD/YYYY"
 								required
@@ -398,13 +414,13 @@
 							<label for="background-color">
 								<img src="images/color-picker.png" alt="Color picker" />
 							</label>
-							<input type="color" name="background-color" id="background-color" />
+							<input type="color" name="bg_color" id="background-color" />
 						</div>
 					</div>
 
 					<div>
 						<label for="notes">Notes (optional)</label><br />
-						<textarea class="" name="notes" id="notes" required></textarea>
+						<textarea class="" name="note" id="notes" required></textarea>
 					</div>
 
 					<button id="add-teacher-button" type="submit" class="btn">Add</button>

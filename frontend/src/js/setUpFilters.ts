@@ -1,4 +1,4 @@
-import { renderUsers } from './renderUsers';
+import { renderUsers } from './render/renderUsers';
 import { StoredUser } from './typings/FormattedUser';
 import { UserFilters } from './typings/UserFilters';
 

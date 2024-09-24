@@ -1,23 +1,27 @@
-import { FormattedUser, StoredUser } from './typings/FormattedUser';
+import { StoredUser } from '../typings/FormattedUser';
 
-export function setInfoPopupContent(user: StoredUser, teacherInfoPopup: HTMLDialogElement): void {
+export function setInfoPopupContent(user: StoredUser): void {
+	const currentFavoriteStatus = user.favorite;
 	const container = document.getElementById('info-popup-body');
+	const teacherInfoPopup = document.getElementById('teacher-info-popup') as HTMLDialogElement;
 	const closeTeacherInfoPopupBtn = document.getElementById('close-teacher-info-button') as HTMLButtonElement;
 
 	function hideTeacherInfoPopup() {
-		const requestOptions = {
-			method: 'PUT',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ userId: user._id, favorite: user.favorite }),
-		};
+		if (user.favorite !== currentFavoriteStatus) {
+			const requestOptions = {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ userId: user._id, favorite: user.favorite }),
+			};
 
-		fetch('http://localhost:3030/api/user/favorite', requestOptions).then((response) => {
-			if (response.ok) {
-				console.log('User favorite status updated');
-			} else {
-				console.error('Failed to update user favorite status');
-			}
-		});
+			fetch('http://localhost:3030/api/user/favorite', requestOptions).then((response) => {
+				if (response.ok) {
+					console.log('User favorite status updated');
+				} else {
+					console.error('Failed to update user favorite status' + response);
+				}
+			});
+		}
 
 		closeTeacherInfoPopupBtn.removeEventListener('click', hideTeacherInfoPopup);
 		teacherInfoPopup.close();
@@ -35,7 +39,7 @@ export function setInfoPopupContent(user: StoredUser, teacherInfoPopup: HTMLDial
 	const contactInfo = document.createElement('div');
 	contactInfo.classList.add('teacher-info-contact-details');
 	contactInfo.innerHTML = `
-		<img src="${user.picture_large}" alt="Teacher photo" />
+		<img src="${user.picture_large ?? './images/patrick.png'}" alt="Teacher photo" />
 		<article>
 			<div class="headline">
 				<h2>${user.full_name}</h2>
@@ -56,7 +60,9 @@ export function setInfoPopupContent(user: StoredUser, teacherInfoPopup: HTMLDial
 
 	const mapLink = document.createElement('a');
 	mapLink.classList.add('teacher-info-toggle-map');
-	mapLink.href = `https://www.google.com/maps/search/?api=1&query=${user.coordinates.latitude},${user.coordinates.longitude}`;
+	mapLink.href = user.coordinates
+		? `https://www.google.com/maps/search/?api=1&query=${user.coordinates.latitude},${user.coordinates.longitude}`
+		: '#';
 	mapLink.innerText = 'Toggle map';
 
 	container.appendChild(contactInfo);
@@ -65,6 +71,7 @@ export function setInfoPopupContent(user: StoredUser, teacherInfoPopup: HTMLDial
 
 	const favoriteButton = document.getElementById('favorite-button') as HTMLImageElement;
 	favoriteButton?.addEventListener('click', () => {
+		console.log('Favorite button clicked');
 		user.favorite = !user.favorite;
 		const favoritesContainer = document.getElementById('favorites-slider-container');
 		const userCardFavorite = document.getElementById(`favorite-${user._id}`);
@@ -82,5 +89,40 @@ export function setInfoPopupContent(user: StoredUser, teacherInfoPopup: HTMLDial
 			favoritesContainer.removeChild(userCardFavorite);
 		}
 		userCard?.classList.toggle('favorite');
+	});
+}
+
+export function handleUserInfoPopup(users: StoredUser[]): void {
+	const teachersGrid = document.getElementById('teachers-grid');
+	const favoriteTeachersSlider = document.getElementById('favorites-slider-container');
+	const teacherInfoPopup = document.getElementById('teacher-info-popup') as HTMLDialogElement;
+
+	function showTeacherInfoPopup(id: string) {
+		const teacher = users.find((user) => user._id.toString() === id);
+		setInfoPopupContent(teacher);
+
+		teacherInfoPopup.showModal();
+	}
+
+	teachersGrid.addEventListener('click', (event) => {
+		const target = event.target as HTMLElement;
+
+		const teacherCard = target.closest('.teacher-card');
+
+		if (teacherCard) {
+			const id = teacherCard.id;
+			showTeacherInfoPopup(id);
+		}
+	});
+
+	favoriteTeachersSlider.addEventListener('click', (event) => {
+		const target = event.target as HTMLElement;
+
+		const teacherCard = target.closest('.teacher-card');
+
+		if (teacherCard) {
+			const id = teacherCard.id.slice(9);
+			showTeacherInfoPopup(id);
+		}
 	});
 }

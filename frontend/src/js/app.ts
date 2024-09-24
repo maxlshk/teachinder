@@ -1,8 +1,10 @@
 import { randomUserMock, additionalUsers } from './data/FE4U-Lab2-mock';
-import { renderTable } from './renderTable';
-import { renderUsers } from './renderUsers';
-import { setUpButtons } from './setUpButtons';
+import { handleAddUsersPopup } from './handlers/handleAddUsersPopup';
+import { handleUserInfoPopup } from './handlers/handleUserInfoPopup';
+import { renderTable } from './render/renderTable';
+import { renderUsers } from './render/renderUsers';
 import { setUpFilters } from './setUpFilters';
+import { setUpHorizontalScroll } from './setUpHorizontalScroll';
 import { setUpSearch } from './setUpSearch';
 import { setUpSorting } from './setUpSorting';
 import { FormattedUser, StoredUser } from './typings/FormattedUser';
@@ -76,7 +78,9 @@ async function fetchOrGenerateUsers(): Promise<StoredUser[]> {
 function initializeUI(users: StoredUser[]) {
 	renderUsers(users);
 	renderTable(users);
-	setUpButtons(users);
+	setUpHorizontalScroll();
+	handleUserInfoPopup(users);
+	handleAddUsersPopup();
 	setUpFilters(users, filterUsers);
 	setUpSorting(users, sortUsers);
 	setUpSearch(users, findUsers);

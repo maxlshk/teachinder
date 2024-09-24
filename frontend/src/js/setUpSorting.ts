@@ -1,4 +1,4 @@
-import { renderTable } from './renderTable';
+import { renderTable } from './render/renderTable';
 import { StoredUser } from './typings/FormattedUser';
 import { SortingUserFilters } from './typings/UserFilters';
 

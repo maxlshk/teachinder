@@ -1,4 +1,4 @@
-import { renderUsers } from './renderUsers';
+import { renderUsers } from './render/renderUsers';
 import { StoredUser } from './typings/FormattedUser';
 
 export function setUpSearch(users: StoredUser[], search: (users: StoredUser[], searchValue: string) => StoredUser[]) {
