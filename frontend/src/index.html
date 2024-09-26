@@ -18,7 +18,7 @@
 					<input
 						type="text"
 						class="header-search-field"
-						id="header-search-field"
+						id="search-field"
 						name="search"
 						placeholder="Name, note or age to search"
 					/>
@@ -53,10 +53,11 @@
 			<section id="teachers" class="container section">
 				<h2 class="section-title">Top Teachers</h2>
 
-				<div class="teachers-filters">
+				<div class="teachers-filters" id="filters-form">
 					<div class="teacher-filter">
-						<label for="age">Age</label>
-						<select id="age" name="age">
+						<label for="age-filter">Age</label>
+						<select id="age-filter" name="age-filter">
+							<option value="">Select</option>
 							<option value="18-31">18-31</option>
 							<option value="32-50">32-50</option>
 							<option value="51-62">51-62</option>
@@ -66,26 +67,29 @@
 					</div>
 
 					<div class="teacher-filter">
-						<label for="region">Region</label>
-						<select id="region" name="region">
+						<label for="region-filter">Region</label>
+						<select id="region-filter" name="region-filter">
+							<option value="">Select</option>
 							<option value="Europe">Europe</option>
 							<option value="America">North America</option>
 							<option value="Asia">Asia</option>
 							<option value="Africa">Africa</option>
+							<option value="France">France</option>
 						</select>
 					</div>
 
 					<div class="teacher-filter">
-						<label for="sex">Sex</label>
-						<select id="sex" name="sex">
+						<label for="gender-filter">Sex</label>
+						<select id="gender-filter" name="gender-filter">
+							<option value="">Select</option>
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
 						</select>
 					</div>
 
 					<div class="teacher-filter">
-						<input type="checkbox" id="photo" name="photo" />
-						<label for="photo">Only with photo</label>
+						<input type="checkbox" id="with-photo-only" name="with-photo-only" />
+						<label for="with-photo-only">Only with photo</label>
 					</div>
 
 					<div class="teacher-filter">
@@ -95,66 +99,7 @@
 				</div>
 
 				<div class="teachers-grid" id="teachers-grid">
-					<div class="teacher-card">
-						<div class="teacher-card-photo">
-							<img src="./images/patrick.png" alt="Teacher photo" />
-						</div>
-						<p class="teacher-card-full-name">Patrick Bateman</p>
-						<p class="teacher-card-country">United States</p>
-					</div>
-					<div class="teacher-card">
-						<div class="teacher-card-photo">
-							<img src="./images/patrick.png" alt="Teacher photo" />
-						</div>
-						<p class="teacher-card-full-name">Patrick Bateman</p>
-						<p class="teacher-card-country">United States</p>
-					</div>
-					<div class="teacher-card favorite">
-						<div class="teacher-card-photo">
-							<img src="./images/patrick.png" alt="Teacher photo" />
-						</div>
-						<p class="teacher-card-full-name">Patrick Bateman</p>
-						<p class="teacher-card-country">United States</p>
-					</div>
-					<div class="teacher-card">
-						<div class="teacher-card-photo">
-							<img src="./images/patrick.png" alt="Teacher photo" />
-						</div>
-						<p class="teacher-card-full-name">Patrick Bateman</p>
-						<p class="teacher-card-country">United States</p>
-					</div>
-					<div class="teacher-card favorite">
-						<div class="teacher-card-photo">
-							<img src="./images/patrick.png" alt="Teacher photo" />
-						</div>
-						<p class="teacher-card-full-name">Patrick Bateman</p>
-						<p class="teacher-card-country">United States</p>
-					</div>
-					<div class="teacher-card">
-						<div class="teacher-card-photo">
-							<img src="./images/patrick.png" alt="Teacher photo" />
-						</div>
-						<p class="teacher-card-full-name">Patrick Bateman</p>
-						<p class="teacher-card-country">United States</p>
-					</div>
-					<div class="teacher-card">
-						<div class="teacher-card-photo">
-							<div>
-								<span>P.B</span>
-							</div>
-						</div>
-						<p class="teacher-card-full-name">Patrick Bateman</p>
-						<p class="teacher-card-country">United States</p>
-					</div>
-					<div class="teacher-card">
-						<div class="teacher-card-photo">
-							<div>
-								<span>P.B</span>
-							</div>
-						</div>
-						<p class="teacher-card-full-name">Patrick Bateman</p>
-						<p class="teacher-card-country">United States</p>
-					</div>
+					<!--TEACHERS-->
 				</div>
 			</section>
 
@@ -163,28 +108,13 @@
 				<h2 class="section-title">Statistics</h2>
 
 				<table id="table" class="statistics-table">
-					<thead>
+					<thead id="statistics-table-head">
 						<tr>
-							<th>
-								Name
-								<img class="statistics-table-head-arrow" src="images/blue-arrow-down.png" alt="arrow" />
-							</th>
-							<th>
-								Specialty
-								<img class="statistics-table-head-arrow" src="images/blue-arrow-down.png" alt="arrow" />
-							</th>
-							<th>
-								Age
-								<img class="statistics-table-head-arrow" src="images/blue-arrow-down.png" alt="arrow" />
-							</th>
-							<th>
-								Gender
-								<img class="statistics-table-head-arrow" src="images/blue-arrow-down.png" alt="arrow" />
-							</th>
-							<th>
-								Nationality
-								<img class="statistics-table-head-arrow" src="images/blue-arrow-down.png" alt="arrow" />
-							</th>
+							<th data-value="full_name">Name</th>
+							<th data-value="course">Specialty</th>
+							<th data-value="age">Age</th>
+							<th data-value="gender">Gender</th>
+							<th data-value="country">Nationality</th>
 						</tr>
 					</thead>
 
@@ -266,11 +196,11 @@
 				<h2 class="section-title">Favorites</h2>
 
 				<div class="favorites-slider">
-					<a href="#">
+					<a id="left-arrow">
 						<img class="arrow" src="images/left-arrow.png" alt="Left arrow" />
 					</a>
 
-					<div class="favorites-slider-grid">
+					<div class="favorites-slider-grid" id="favorites-slider-container">
 						<div class="teacher-card">
 							<div class="teacher-card-photo">
 								<img src="./images/patrick.png" alt="Teacher photo" />
@@ -308,7 +238,7 @@
 						</div>
 					</div>
 
-					<a href="#">
+					<a id="right-arrow">
 						<img class="arrow" src="images/right-arrow.png" alt="Right arrow" />
 					</a>
 				</div>
@@ -368,21 +298,31 @@
 						<input
 							class="add-teacher-form-input"
 							type="text"
-							name="name"
+							name="full_name"
 							id="name"
 							placeholder="Enter name"
 							required
+							minlength="4"
+							pattern="^[A-Z][a-z]+\s+[A-Z][a-z]+$"
+							title="Please enter a first and last name, each starting with a capital letter."
 						/>
 					</div>
 
 					<div>
 						<label for="speciality">Speciality</label>
-						<select class="add-teacher-form-input" name="speciality" id="speciality">
+						<select class="add-teacher-form-input" name="course" id="speciality">
 							<option value="Mathematics">Mathematics</option>
-							<option value="Chemistry">Chemistry</option>
-							<option value="Art">Art</option>
+							<option value="Physics">Physics</option>
 							<option value="English">English</option>
+							<option value="Computer Science">Computer Science</option>
+							<option value="Dancing">Dancing</option>
+							<option value="Chess">Chess</option>
 							<option value="Biology">Biology</option>
+							<option value="Chemistry">Chemistry</option>
+							<option value="Law">Law</option>
+							<option value="Art">Art</option>
+							<option value="Medicine">Medicine</option>
+							<option value="Statistics">Statistics</option>
 						</select>
 					</div>
 
@@ -410,6 +350,9 @@
 								name="city"
 								id="city"
 								required
+								minlength="3"
+								pattern="^[A-Z][a-z]*(\s+[A-Z][a-z]*)*$"
+								title="City name should start with a capital letter"
 							/>
 						</div>
 					</div>
@@ -423,6 +366,8 @@
 								name="email"
 								id="email"
 								required
+								minlength="6"
+								pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
 							/>
 						</div>
 
@@ -431,9 +376,10 @@
 							<input
 								class="add-teacher-form-input add-teacher-form-input-margin-top"
 								type="tel"
-								name="phone_number"
+								name="phone"
 								id="phone_number"
 								required
+								pattern="[0-9]{10}"
 							/>
 						</div>
 					</div>
@@ -444,7 +390,7 @@
 							<input
 								class="add-teacher-form-input"
 								type="date"
-								name="birth-date"
+								name="b_day"
 								id="birth-date"
 								placeholder="MM/DD/YYYY"
 								required
@@ -468,13 +414,13 @@
 							<label for="background-color">
 								<img src="images/color-picker.png" alt="Color picker" />
 							</label>
-							<input type="color" name="background-color" id="background-color" />
+							<input type="color" name="bg_color" id="background-color" />
 						</div>
 					</div>
 
 					<div>
 						<label for="notes">Notes (optional)</label><br />
-						<textarea class="" name="notes" id="notes" required></textarea>
+						<textarea class="" name="note" id="notes" required></textarea>
 					</div>
 
 					<button id="add-teacher-button" type="submit" class="btn">Add</button>
@@ -489,7 +435,7 @@
 					<h3>Teacher Info</h3>
 					<img src="images/cross.png" id="close-teacher-info-button" class="close-popup-button" alt="Close" />
 				</div>
-				<div class="teacher-info-details-container">
+				<div class="teacher-info-details-container" id="info-popup-body">
 					<div class="teacher-info-contact-details">
 						<img src="./images/patrick.png" alt="Teacher photo" />
 						<article>

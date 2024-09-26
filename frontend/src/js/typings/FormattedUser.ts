@@ -1,5 +1,5 @@
 export interface FormattedUser {
-	id: string;
+	// id: string;
 	favorite: boolean;
 	course: string;
 	bg_color: string;
@@ -19,4 +19,8 @@ export interface FormattedUser {
 	phone: string;
 	picture_large?: string;
 	picture_thumbnail?: string;
+}
+
+export interface StoredUser extends FormattedUser {
+	_id: string;
 }

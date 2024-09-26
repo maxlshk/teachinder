@@ -64,9 +64,6 @@
   float: left;
   margin-right: 3rem;
 }
-.nav-list ul li:hover {
-  color: #cc4836;
-}
 .nav-list ul li:last-child {
   margin-right: 0;
 }
@@ -74,6 +71,9 @@
   font: normal bolder 1.2rem/1.5 "Roboto", sans-serif;
   color: #f75c49;
   text-decoration: none;
+}
+.nav-list ul a:hover {
+  color: #cc4836;
 }
 
 @media screen and (max-width: 820px) {
@@ -285,12 +285,6 @@
   margin-bottom: 35px;
   transition: 0.2s;
 }
-.statistics-table-head-arrow {
-  display: none;
-  margin-left: 10px;
-  height: 17px;
-  width: 7px;
-}
 .statistics-table th {
   text-align: start;
   font-size: 18px;
@@ -298,7 +292,7 @@
   padding: 15px 0;
   position: relative;
 }
-.statistics-table th::after {
+.statistics-table th::before {
   content: "";
   width: 100%;
   height: 1px;
@@ -308,12 +302,26 @@
   left: 0;
   transition: 0.2s;
 }
-th:hover .statistics-table-head-arrow {
-  display: inline;
+.statistics-table th::after {
+  content: url("../images/blue-arrow-down.png");
+  display: none;
+  position: absolute;
+  right: auto;
+  margin-left: 10px;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 23px;
   transition: 0.2s;
 }
-.statistics-table th:hover:after {
+.statistics-table th.up::after {
+  transform: scaleY(-1);
+  transition: 0.2s;
+}
+.statistics-table th:hover::before {
   height: 5px;
+}
+.statistics-table th:hover::after {
+  display: inline;
 }
 .statistics-table th:not(:first-child) {
   text-align: center;
@@ -392,16 +400,19 @@ th:hover .statistics-table-head-arrow {
   gap: 2rem;
   justify-content: space-between;
   align-items: center;
+  scrollbar-width: none;
 }
 .favorites-slider-grid {
   display: flex;
   flex-grow: 1;
   gap: 4rem;
   overflow-x: auto;
+  scrollbar-width: none;
 }
 
 .arrow {
   opacity: 0.5;
+  cursor: pointer;
 }
 .arrow:hover {
   opacity: 1;
