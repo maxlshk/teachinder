@@ -1,10 +1,8 @@
+import { renderTable } from '../render/renderTable';
+import { renderUsers } from '../render/renderUsers';
 import { StoredUser } from '../typings/FormattedUser';
-import { parsePhoneNumberFromString, CountryCode } from 'libphonenumber-js';
-import countries from 'i18n-iso-countries';
 
-countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
-
-export function handleAddUsersPopup(): void {
+export function handleAddUsersPopup(users: StoredUser[]): void {
 	const addTeacherBtns = document.querySelectorAll(
 		'.btn[data-target="add-teacher-popup"]',
 	) as NodeListOf<HTMLButtonElement>;
@@ -50,7 +48,8 @@ export function handleAddUsersPopup(): void {
 				console.log('Teacher added successfully');
 				addTeacherPopup.close();
 				form.reset();
-				location.reload();
+				renderUsers([...users, formObject as StoredUser]);
+				renderTable([...users, formObject as StoredUser]);
 			} else {
 				const errorData = await response.json();
 				console.error('Failed to add teacher:', errorData);

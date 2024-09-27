@@ -7,21 +7,21 @@ export function setInfoPopupContent(user: StoredUser): void {
 	const closeTeacherInfoPopupBtn = document.getElementById('close-teacher-info-button') as HTMLButtonElement;
 
 	function hideTeacherInfoPopup() {
-		if (user.favorite !== currentFavoriteStatus) {
-			const requestOptions = {
-				method: 'PUT',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ userId: user._id, favorite: user.favorite }),
-			};
+		// if (user.favorite !== currentFavoriteStatus) {
+		// 	const requestOptions = {
+		// 		method: 'PUT',
+		// 		headers: { 'Content-Type': 'application/json' },
+		// 		body: JSON.stringify({ userId: user._id, favorite: user.favorite }),
+		// 	};
 
-			fetch('http://localhost:3030/api/user/favorite', requestOptions).then((response) => {
-				if (response.ok) {
-					console.log('User favorite status updated');
-				} else {
-					console.error('Failed to update user favorite status' + response);
-				}
-			});
-		}
+		// 	fetch('http://localhost:3030/api/user/favorite', requestOptions).then((response) => {
+		// 		if (response.ok) {
+		// 			console.log('User favorite status updated');
+		// 		} else {
+		// 			console.error('Failed to update user favorite status' + response);
+		// 		}
+		// 	});
+		// }
 
 		closeTeacherInfoPopupBtn.removeEventListener('click', hideTeacherInfoPopup);
 		teacherInfoPopup.close();
@@ -71,7 +71,6 @@ export function setInfoPopupContent(user: StoredUser): void {
 
 	const favoriteButton = document.getElementById('favorite-button') as HTMLImageElement;
 	favoriteButton?.addEventListener('click', () => {
-		console.log('Favorite button clicked');
 		user.favorite = !user.favorite;
 		const favoritesContainer = document.getElementById('favorites-slider-container');
 		const userCardFavorite = document.getElementById(`favorite-${user._id}`);

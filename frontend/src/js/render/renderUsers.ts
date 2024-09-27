@@ -31,7 +31,9 @@ export function renderUsers(users: StoredUser[]): void {
 								.join('.')}</span></div>`
 				}
 			</div>
-			<p class="teacher-card-full-name">${user.full_name}</p>
+			<p class="teacher-card-full-name">${
+				user.full_name.length > 14 ? user.full_name.slice(0, 12) + '...' : user.full_name
+			}</p>
 			<p class="teacher-card-country">${user.country}</p>
 		`;
 

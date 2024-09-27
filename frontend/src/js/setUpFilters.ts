@@ -1,3 +1,4 @@
+import { renderTable } from './render/renderTable';
 import { renderUsers } from './render/renderUsers';
 import { StoredUser } from './typings/FormattedUser';
 import { UserFilters } from './typings/UserFilters';
@@ -52,8 +53,9 @@ export function setUpFilters(
 	if (filtersForm) {
 		filtersForm.addEventListener('input', () => {
 			const filters = getCurrentFilters();
-			console.log(filters);
-			renderUsers(applyFilters(users, filters));
+			const result = applyFilters(users, filters);
+			renderUsers(result);
+			renderTable(result);
 		});
 	}
 }
