@@ -1,4 +1,4 @@
-import { FormattedUser, StoredUser } from '../typings/FormattedUser';
+import { StoredUser } from '../typings/FormattedUser';
 import { UserFilters } from '../typings/UserFilters';
 
 export function filterUsers(users: StoredUser[], filters: UserFilters): StoredUser[] {

@@ -1,5 +1,7 @@
 import { renderTable } from '../render/renderTable';
 import { renderUsers } from '../render/renderUsers';
+import { applyFilters } from '../setUpFilters';
+import { applySearch } from '../setUpSearch';
 import { StoredUser } from '../typings/FormattedUser';
 
 export const GlobalContext = (() => {
@@ -24,6 +26,11 @@ export const GlobalContext = (() => {
 			console.log('Displayed users array changed!');
 			renderUsers(GlobalContext.displayedUsers);
 			renderTable(GlobalContext.displayedUsers);
+		},
+
+		applyRestrictions() {
+			applyFilters();
+			applySearch();
 		},
 	};
 })();

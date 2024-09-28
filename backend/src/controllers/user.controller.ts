@@ -9,14 +9,15 @@ export const initDB = (database: Db) => {
 
 export const getUsers = async (req: Request, res: Response): Promise<void> => {
   try {
-    const limit = parseInt(req.query.limit as string) || 50; // Default to 50 users if not provided
-    const skip = parseInt(req.query.skip as string) || 0; // Default to 0 (no users skipped)
+    const limit = parseInt(req.query.limit as string) || 50;
+    const skip = parseInt(req.query.skip as string) || 0;
 
     const users = await db
       .collection('users')
       .find()
-      .skip(skip) // Skip `n` users
-      .limit(limit) // Limit the results to `n` users
+      .sort({ picture_large: 1 })
+      .skip(skip)
+      .limit(limit)
       .toArray();
 
     res.status(200).json(users);

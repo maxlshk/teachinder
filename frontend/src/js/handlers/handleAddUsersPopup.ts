@@ -1,6 +1,4 @@
 import { GlobalContext } from '../context/context';
-import { renderTable } from '../render/renderTable';
-import { renderUsers } from '../render/renderUsers';
 import { StoredUser } from '../typings/FormattedUser';
 
 export function handleAddUsersPopup(): void {
@@ -48,7 +46,8 @@ export function handleAddUsersPopup(): void {
 			if (response.ok) {
 				addTeacherPopup.close();
 				form.reset();
-				GlobalContext.users.push(formObject as StoredUser);
+				formObject._id = (await response.json()).userId;
+				GlobalContext.users = [formObject as StoredUser, ...GlobalContext.users];
 			} else {
 				const errorData = await response.json();
 				console.error('Failed to add teacher:', errorData);

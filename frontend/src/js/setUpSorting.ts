@@ -1,6 +1,5 @@
 import { GlobalContext } from './context/context';
 import { renderTable } from './render/renderTable';
-import { StoredUser } from './typings/FormattedUser';
 import { SortingUserFilters } from './typings/UserFilters';
 import { sortUsers } from './utils/sortUsers';
 

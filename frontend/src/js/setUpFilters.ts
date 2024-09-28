@@ -1,9 +1,12 @@
 import { GlobalContext } from './context/context';
-import { renderTable } from './render/renderTable';
-import { renderUsers } from './render/renderUsers';
-import { StoredUser } from './typings/FormattedUser';
 import { UserFilters } from './typings/UserFilters';
 import { filterUsers } from './utils/filterUsers';
+
+export function applyFilters() {
+	const filters = getCurrentFilters();
+	const filterResult = filterUsers(GlobalContext.users, filters);
+	GlobalContext.displayedUsers = filterResult;
+}
 
 export function setUpFilters() {
 	const filtersForm = document.getElementById('filters-form');
@@ -30,30 +33,27 @@ export function setUpFilters() {
 		regionFilter.appendChild(fragment);
 	}
 
-	function getCurrentFilters(): UserFilters {
-		const ageFilter = document.getElementById('age-filter') as HTMLSelectElement;
-		const sexFilter = document.getElementById('gender-filter') as HTMLSelectElement;
-		const withPhotoOnly = document.getElementById('with-photo-only') as HTMLInputElement;
-		const favoritesOnly = document.getElementById('favorites-only') as HTMLInputElement;
-
-		const [min, max] = ageFilter.value.split('-').map(Number);
-
-		return {
-			age: { min, max },
-			country: regionFilter.value.length > 0 ? regionFilter.value : undefined,
-			gender: sexFilter.value === 'Male' || sexFilter.value === 'Female' ? sexFilter.value : undefined,
-			picture_large: withPhotoOnly.checked ? true : undefined,
-			favorite: favoritesOnly.checked ? true : undefined,
-		};
-	}
-
 	populateRegionFilter();
 
 	if (filtersForm) {
-		filtersForm.addEventListener('input', () => {
-			const filters = getCurrentFilters();
-			const filterResult = filterUsers(GlobalContext.displayedUsers, filters);
-			GlobalContext.displayedUsers = filterResult;
-		});
+		filtersForm.addEventListener('input', GlobalContext.applyRestrictions);
 	}
+}
+
+function getCurrentFilters(): UserFilters {
+	const regionFilter = document.getElementById('region-filter') as HTMLSelectElement;
+	const ageFilter = document.getElementById('age-filter') as HTMLSelectElement;
+	const sexFilter = document.getElementById('gender-filter') as HTMLSelectElement;
+	const withPhotoOnly = document.getElementById('with-photo-only') as HTMLInputElement;
+	const favoritesOnly = document.getElementById('favorites-only') as HTMLInputElement;
+
+	const [min, max] = ageFilter.value.split('-').map(Number);
+
+	return {
+		age: { min, max },
+		country: regionFilter.value.length > 0 ? regionFilter.value : undefined,
+		gender: sexFilter.value === 'Male' || sexFilter.value === 'Female' ? sexFilter.value : undefined,
+		picture_large: withPhotoOnly.checked ? true : undefined,
+		favorite: favoritesOnly.checked ? true : undefined,
+	};
 }

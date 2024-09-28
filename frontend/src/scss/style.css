@@ -659,6 +659,10 @@ p {
   color: #f75c49;
   transition: 0.2s;
 }
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 .btn:hover {
   background-color: #f75c49;

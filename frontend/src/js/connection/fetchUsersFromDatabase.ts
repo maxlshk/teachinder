@@ -6,15 +6,16 @@ let limit = 50;
 
 export async function fetchUsersFromDatabase(): Promise<StoredUser[]> {
 	try {
+		skip = GlobalContext.users.length;
 		console.log('Fetching users from database: ', skip, limit);
 		const response = await fetch(`http://localhost:3030/api/user/all?limit=${limit}&skip=${skip}`);
 		if (response.ok) {
 			const newUsers = await response.json();
 			console.log('Users fetched successfully', newUsers);
 			if (newUsers.length > 0) {
-				skip += newUsers.length;
 				limit = 10;
 				GlobalContext.users = GlobalContext.users.concat(newUsers);
+				GlobalContext.applyRestrictions();
 			}
 			return newUsers;
 		} else {
