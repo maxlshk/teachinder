@@ -1,17 +1,16 @@
+import { GlobalContext } from './context/context';
 import { renderTable } from './render/renderTable';
 import { renderUsers } from './render/renderUsers';
 import { StoredUser } from './typings/FormattedUser';
 import { UserFilters } from './typings/UserFilters';
+import { filterUsers } from './utils/filterUsers';
 
-export function setUpFilters(
-	users: StoredUser[],
-	applyFilters: (users: StoredUser[], filters: UserFilters) => StoredUser[],
-) {
+export function setUpFilters() {
 	const filtersForm = document.getElementById('filters-form');
 	const regionFilter = document.getElementById('region-filter') as HTMLSelectElement;
 
-	function populateRegionFilter(users: StoredUser[]) {
-		const uniqueCountries = Array.from(new Set(users.map((user) => user.country)));
+	function populateRegionFilter() {
+		const uniqueCountries = Array.from(new Set(GlobalContext.users.map((user) => user.country)));
 
 		const fragment = document.createDocumentFragment();
 
@@ -48,14 +47,13 @@ export function setUpFilters(
 		};
 	}
 
-	populateRegionFilter(users);
+	populateRegionFilter();
 
 	if (filtersForm) {
 		filtersForm.addEventListener('input', () => {
 			const filters = getCurrentFilters();
-			const result = applyFilters(users, filters);
-			renderUsers(result);
-			renderTable(result);
+			const filterResult = filterUsers(GlobalContext.displayedUsers, filters);
+			GlobalContext.displayedUsers = filterResult;
 		});
 	}
 }

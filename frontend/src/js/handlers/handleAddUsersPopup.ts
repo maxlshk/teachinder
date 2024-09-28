@@ -1,8 +1,9 @@
+import { GlobalContext } from '../context/context';
 import { renderTable } from '../render/renderTable';
 import { renderUsers } from '../render/renderUsers';
 import { StoredUser } from '../typings/FormattedUser';
 
-export function handleAddUsersPopup(users: StoredUser[]): void {
+export function handleAddUsersPopup(): void {
 	const addTeacherBtns = document.querySelectorAll(
 		'.btn[data-target="add-teacher-popup"]',
 	) as NodeListOf<HTMLButtonElement>;
@@ -45,11 +46,9 @@ export function handleAddUsersPopup(users: StoredUser[]): void {
 			});
 
 			if (response.ok) {
-				console.log('Teacher added successfully');
 				addTeacherPopup.close();
 				form.reset();
-				renderUsers([...users, formObject as StoredUser]);
-				renderTable([...users, formObject as StoredUser]);
+				GlobalContext.users.push(formObject as StoredUser);
 			} else {
 				const errorData = await response.json();
 				console.error('Failed to add teacher:', errorData);
