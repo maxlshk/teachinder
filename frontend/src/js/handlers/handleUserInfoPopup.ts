@@ -1,5 +1,6 @@
 import { GlobalContext } from '../context/context';
 import { StoredUser } from '../typings/FormattedUser';
+import * as L from 'leaflet';
 
 export function setInfoPopupContent(user: StoredUser): void {
 	const currentFavoriteStatus = user.favorite;
@@ -59,14 +60,27 @@ export function setInfoPopupContent(user: StoredUser): void {
 
 	const mapLink = document.createElement('a');
 	mapLink.classList.add('teacher-info-toggle-map');
-	mapLink.href = user.coordinates
-		? `https://www.google.com/maps/search/?api=1&query=${user.coordinates.latitude},${user.coordinates.longitude}`
-		: '#';
 	mapLink.innerText = 'Toggle map';
+	const mapElement = document.createElement('div');
+	mapElement.id = 'map';
+	mapElement.classList.add('hidden');
+
+	mapLink.addEventListener('click', () => toggleMap(user));
 
 	container.appendChild(contactInfo);
 	container.appendChild(note);
 	container.appendChild(mapLink);
+	container.appendChild(mapElement);
+
+	setTimeout(() => {
+		const coords = [user.coordinates?.latitude ?? 50.4645, user.coordinates?.longitude ?? 30.519394197007927];
+		var map = L.map('map').setView(coords, 13);
+		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+		}).addTo(map);
+		L.marker(coords).addTo(map);
+	}, 0);
 
 	const favoriteButton = document.getElementById('favorite-button') as HTMLImageElement;
 	favoriteButton?.addEventListener('click', () => {
@@ -116,4 +130,10 @@ function handlePopupOpen(event: Event) {
 		const id = teacherCard.id.includes('favorite') ? teacherCard.id.slice(9) : teacherCard.id;
 		showTeacherInfoPopup(id);
 	}
+}
+
+function toggleMap(user: StoredUser) {
+	const map = document.getElementById('map') as HTMLDivElement;
+
+	map.classList.toggle('hidden');
 }

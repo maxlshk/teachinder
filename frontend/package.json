@@ -43,6 +43,7 @@
 	},
 	"dependencies": {
 		"i18n-iso-countries": "^7.12.0",
+		"leaflet": "^1.9.4",
 		"libphonenumber-js": "^1.11.8",
 		"validator": "^13.12.0"
 	}

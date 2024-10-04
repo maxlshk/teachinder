@@ -449,6 +449,18 @@ dialog {
   cursor: pointer;
 }
 
+#map {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  height: 320px;
+  width: 320px;
+  transform: scaleY(100%);
+}
+#map.hidden {
+  transform: scaleY(0);
+}
+
 /* Add Teacher Popup */
 .add-teacher-popup {
   height: 94vh;
@@ -513,6 +525,7 @@ dialog {
 .teacher-info-details-container {
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 1rem;
   padding: 20px;
   text-align: start;
