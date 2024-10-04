@@ -65,7 +65,7 @@ export function setInfoPopupContent(user: StoredUser): void {
 	mapElement.id = 'map';
 	mapElement.classList.add('hidden');
 
-	mapLink.addEventListener('click', () => toggleMap(user));
+	mapLink.addEventListener('click', toggleMap);
 
 	container.appendChild(contactInfo);
 	container.appendChild(note);
@@ -132,7 +132,7 @@ function handlePopupOpen(event: Event) {
 	}
 }
 
-function toggleMap(user: StoredUser) {
+function toggleMap() {
 	const map = document.getElementById('map') as HTMLDivElement;
 
 	map.classList.toggle('hidden');

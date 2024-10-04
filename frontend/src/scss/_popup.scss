@@ -138,6 +138,7 @@ dialog {
 		a {
 			color: #1a9cb0;
 			text-decoration: none;
+			cursor: pointer;
 		}
 	}
 }
@@ -163,8 +164,8 @@ dialog {
 	font-weight: 400;
 	font-size: 14px;
 	color: #1a9cb0;
-	text-decoration-style: dashed;
-	text-underline-offset: 4px;
+	text-decoration: dashed;
+	cursor: pointer;
 }
 
 @media screen and (max-width: 1200px) {
