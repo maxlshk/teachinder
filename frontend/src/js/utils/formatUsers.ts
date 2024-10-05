@@ -1,12 +1,9 @@
 import { FormattedUser, StoredUser } from '../typings/FormattedUser.js';
 import { RandomUser } from '../typings/RandomUser.js';
-
-function capitalizeFirstLetter(string) {
-	return string.charAt(0).toUpperCase() + string.slice(1);
-}
+import _ from 'lodash';
 
 function formatRandomUsers(randomUsers: RandomUser[]): Partial<StoredUser>[] {
-	return randomUsers.map((user) => ({
+	return _.map(randomUsers, (user) => ({
 		gender: user.gender,
 		title: user.name.title,
 		full_name: `${user.name.first} ${user.name.last}`,
@@ -29,14 +26,7 @@ function mergeUsers(
 	formattedRandomUsers: Partial<StoredUser>[],
 	additionalUsers: Partial<StoredUser>[],
 ): Partial<StoredUser>[] {
-	const combinedUsers = [...formattedRandomUsers, ...additionalUsers];
-	const uniqueUsersMap = new Map();
-
-	for (const user of combinedUsers) {
-		uniqueUsersMap.set(user.email, user);
-	}
-
-	return Array.from(uniqueUsersMap.values());
+	return _.uniqBy([...formattedRandomUsers, ...additionalUsers], 'email');
 }
 
 function assignAdditionalFields(users: Partial<FormattedUser>[]): StoredUser[] {
@@ -55,14 +45,14 @@ function assignAdditionalFields(users: Partial<FormattedUser>[]): StoredUser[] {
 		'Statistics',
 	];
 
-	return users.map((user, index) => ({
+	return _.map(users, (user, index) => ({
 		...user,
-		gender: capitalizeFirstLetter(user.gender),
+		gender: _.capitalize(user.gender),
 		// _id: user.id || `user-${index + 1}`,
-		favorite: user.favorite ?? false,
+		favorite: _.defaultTo(user.favorite, false),
 		course: user.course || courses[Math.floor(Math.random() * courses.length)],
-		bg_color: user.bg_color || '#ffffff',
-		note: user.note || 'Note not provided',
+		bg_color: _.defaultTo(user.bg_color, '#ffffff'),
+		note: _.defaultTo(user.note, 'Note not provided'),
 	})) as StoredUser[];
 }
 

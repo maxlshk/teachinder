@@ -1,4 +1,5 @@
 import { StoredUser } from '../typings/FormattedUser';
+import _ from 'lodash';
 
 const operatorMap: {
 	[key: string]: (a: number, b: number) => boolean;
@@ -25,21 +26,18 @@ export function findUsers(users: StoredUser[], searchValue: string): StoredUser[
 		return false;
 	};
 
-	// Convert search value to lowercase for case-insensitive string matching
-	const searchLower = searchValue.toLocaleLowerCase();
+	const searchLower = _.toLower(searchValue);
 
-	return users.filter((user) => {
-		// Check age field
-		if (typeof user.age === 'number' && compareNumbers(user.age, searchValue)) {
+	return _.filter(users, (user) => {
+		if (_.isNumber(user.age) && compareNumbers(user.age, searchValue)) {
 			return true;
 		}
 
-		// Check full_name and note fields for inclusion of search string
-		if (typeof user.full_name === 'string' && user.full_name.toLocaleLowerCase().includes(searchLower)) {
+		if (_.isString(user.full_name) && _.includes(_.toLower(user.full_name), searchLower)) {
 			return true;
 		}
 
-		if (typeof user.note === 'string' && user.note.toLocaleLowerCase().includes(searchLower)) {
+		if (_.isString(user.note) && _.includes(_.toLower(user.note), searchLower)) {
 			return true;
 		}
 
