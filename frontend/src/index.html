@@ -22,7 +22,7 @@
 						name="search"
 						placeholder="Name, note or age to search"
 					/>
-					<button class="btn-search" id="search-button">Search</button>
+					<button class="btn-small" id="search-button">Search</button>
 				</div>
 			</div>
 
@@ -101,6 +101,9 @@
 				<div class="teachers-grid" id="teachers-grid">
 					<!--TEACHERS-->
 				</div>
+				<div class="load-more-section">
+					<button id="load-more-teachers" class="btn">Load more</button>
+				</div>
 			</section>
 
 			<!-- Statistics -->
@@ -178,9 +181,9 @@
 					</tbody>
 				</table>
 
-				<div class="teachers-table-pagination" id="teachers-table-pagination">
+				<div class="teachers-table-pagination">
 					<nav>
-						<ul>
+						<ul id="teachers-table-pagination">
 							<a class="teachers-table-pagination-selected-page-number"><li>1</li></a>
 							<a><li>2</li></a>
 							<a><li>3</li></a>

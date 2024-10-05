@@ -1,4 +1,4 @@
-import { FormattedUser, StoredUser } from '../typings/FormattedUser';
+import { StoredUser } from '../typings/FormattedUser';
 import { findUsers } from './findUsers';
 
 export function findPercentage(
