@@ -1,3 +1,7 @@
+#statistics-section-title {
+	cursor: pointer;
+}
+
 .statistics-table {
 	border-collapse: collapse;
 	width: 100%;
@@ -77,6 +81,14 @@
 			background-color: $table-grey-color;
 		}
 	}
+}
+
+canvas {
+	margin-top: 1rem;
+	margin-left: auto;
+	margin-right: auto;
+	min-height: 500px;
+	min-width: 500px;
 }
 
 .teachers-table-pagination {

@@ -1,40 +1,40 @@
 import { StoredUser } from '../typings/FormattedUser';
 import { UserFilters } from '../typings/UserFilters';
+import _ from 'lodash';
 
 export function filterUsers(users: StoredUser[], filters: UserFilters): StoredUser[] {
 	return users.filter((user) =>
-		Object.entries(filters).every(([key, value]) => {
-			const userValue = user[key];
+		_.every(filters, (value, key) => {
+			const userValue = _.get(user, key);
 
-			if (value === undefined) {
+			if (_.isUndefined(value)) {
 				return true;
 			}
 
 			if (key === 'age') {
-				if (typeof value === 'number') {
+				if (_.isNumber(value)) {
 					return userValue === value;
-				} else if (typeof value === 'object' && value !== null) {
+				} else if (_.isObject(value) && value !== null) {
 					const { min, max } = value as { min?: number; max?: number };
-
-					if (min !== undefined && max !== undefined) {
+					if (!_.isUndefined(min) && !_.isUndefined(max)) {
 						return userValue >= min && userValue <= max;
-					} else if (min !== undefined) {
+					} else if (!_.isUndefined(min)) {
 						return userValue >= min;
-					} else if (max !== undefined) {
+					} else if (!_.isUndefined(max)) {
 						return userValue <= max;
 					}
 				}
 			}
 
-			if (typeof value === 'string' && typeof userValue === 'string') {
-				return userValue.toLocaleLowerCase() === value.toLocaleLowerCase();
+			if (_.isString(value) && _.isString(userValue)) {
+				return _.toLower(userValue) === _.toLower(value);
 			}
 
-			if (typeof value === 'boolean') {
-				return !!userValue;
+			if (_.isBoolean(value)) {
+				return !!userValue === value;
 			}
 
-			return userValue === value;
+			return _.isEqual(userValue, value);
 		}),
 	);
 }

@@ -2,10 +2,12 @@ import { fetchOrGenerateUsers } from './connection/fetchOrGenerateUsers';
 import { handleAddUsersPopup } from './handlers/handleAddUsersPopup';
 import { handleLoadingMoreUsers } from './handlers/handleLoadingMoreUsers';
 import { handleUserInfoPopup } from './handlers/handleUserInfoPopup';
+import { setUpChart } from './setUpChart';
 import { setUpFilters } from './setUpFilters';
 import { setUpHorizontalScroll } from './setUpHorizontalScroll';
 import { setUpSearch } from './setUpSearch';
 import { setUpSorting } from './setUpSorting';
+import { setUpStatistics } from './setUpStatistics';
 require('../css/app.css');
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -19,7 +21,9 @@ export function initializeUI(): void {
 	handleUserInfoPopup();
 	handleAddUsersPopup();
 	handleLoadingMoreUsers();
-	setUpFilters();
+	setUpStatistics();
 	setUpSorting();
+	setUpChart();
+	setUpFilters();
 	setUpSearch();
 }

@@ -15,7 +15,7 @@ export const getUsers = async (req: Request, res: Response): Promise<void> => {
     const users = await db
       .collection('users')
       .find()
-      .sort({ picture_large: 1 })
+      .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit)
       .toArray();
@@ -29,7 +29,10 @@ export const getUsers = async (req: Request, res: Response): Promise<void> => {
 
 export const postUser = async (req: Request, res: Response): Promise<void> => {
   try {
-    const newUser = req.body;
+    const newUser = {
+      ...req.body,
+      createdAt: new Date(),
+    };
     const result = await db.collection('users').insertOne(newUser);
     res
       .status(201)

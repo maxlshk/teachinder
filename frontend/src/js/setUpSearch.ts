@@ -11,6 +11,8 @@ export function applySearch() {
 	const searchInput = document.getElementById('search-field') as HTMLInputElement;
 
 	const searchValue = searchInput.value;
-	const searchResults = findUsers(GlobalContext.displayedUsers, searchValue);
-	GlobalContext.displayedUsers = searchResults;
+	if (searchValue.length !== 0) {
+		const searchResults = findUsers(GlobalContext.displayedUsers, searchValue);
+		GlobalContext.displayedUsers = searchResults;
+	}
 }

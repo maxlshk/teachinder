@@ -283,6 +283,10 @@
   font-weight: 400;
 }
 
+#statistics-section-title {
+  cursor: pointer;
+}
+
 .statistics-table {
   border-collapse: collapse;
   width: 100%;
@@ -347,6 +351,14 @@
 }
 .statistics-table tbody tr:nth-child(even) {
   background-color: #f9f5f9;
+}
+
+canvas {
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 500px;
+  min-width: 500px;
 }
 
 .teachers-table-pagination {
@@ -449,6 +461,18 @@ dialog {
   cursor: pointer;
 }
 
+#map {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  height: 320px;
+  width: 320px;
+  transform: scaleY(100%);
+}
+#map.hidden {
+  transform: scaleY(0);
+}
+
 /* Add Teacher Popup */
 .add-teacher-popup {
   height: 94vh;
@@ -513,6 +537,7 @@ dialog {
 .teacher-info-details-container {
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 1rem;
   padding: 20px;
   text-align: start;
@@ -531,23 +556,24 @@ dialog {
   -o-object-fit: cover;
      object-fit: cover;
 }
-.teacher-info-contact-details article {
+
+article {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
   justify-content: space-between;
-  font-size: 14px;
   font-weight: 400;
 }
-.teacher-info-contact-details article h4 {
+article h4 {
   margin: 1rem 0;
   font-size: 22px;
   font-weight: 700;
 }
-.teacher-info-contact-details article a {
+article a {
   color: #1a9cb0;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .headline {
@@ -569,14 +595,25 @@ dialog {
   font-weight: 400;
   font-size: 14px;
   color: #1a9cb0;
-  text-decoration-style: dashed;
-  text-underline-offset: 4px;
+  -webkit-text-decoration: dashed;
+          text-decoration: dashed;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1200px) {
   .teacher-info-popup {
     width: -moz-fit-content;
     width: fit-content;
+  }
+  article p,
+  article a {
+    font-size: 12px;
+  }
+  article h4 {
+    font-size: 18px;
+  }
+  .headline h2 {
+    font-size: 24px;
   }
 }
 @media screen and (max-width: 620px) {
