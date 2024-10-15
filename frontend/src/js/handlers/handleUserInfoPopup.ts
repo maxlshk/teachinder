@@ -1,5 +1,7 @@
 import { GlobalContext } from '../context/context';
 import { StoredUser } from '../typings/FormattedUser';
+import dayjs from 'dayjs';
+import * as L from 'leaflet';
 
 export function setInfoPopupContent(user: StoredUser): void {
 	const currentFavoriteStatus = user.favorite;
@@ -35,6 +37,10 @@ export function setInfoPopupContent(user: StoredUser): void {
 
 	container.innerHTML = '';
 
+	const { birthDate, daysUntilBirthday } = calculateBirthday(user);
+	const note = createNote(user);
+	const { mapElement, mapLink } = createMap();
+
 	const contactInfo = document.createElement('div');
 	contactInfo.classList.add('teacher-info-contact-details');
 	contactInfo.innerHTML = `
@@ -51,43 +57,48 @@ export function setInfoPopupContent(user: StoredUser): void {
 			<p>${user.age}, ${user.gender}</p>
 			<a href="mailto:${user.email}">${user.email}</a>
 			<p>${user.phone}</p>
+			<p>${birthDate.format('MMMM D, YYYY')}</p>
+			<p><b>Days until next birthday:</b> ${daysUntilBirthday}</p>
 		</article>
 	`;
-
-	const note = document.createElement('p');
-	note.innerText = user.note;
-
-	const mapLink = document.createElement('a');
-	mapLink.classList.add('teacher-info-toggle-map');
-	mapLink.href = user.coordinates
-		? `https://www.google.com/maps/search/?api=1&query=${user.coordinates.latitude},${user.coordinates.longitude}`
-		: '#';
-	mapLink.innerText = 'Toggle map';
 
 	container.appendChild(contactInfo);
 	container.appendChild(note);
 	container.appendChild(mapLink);
+	container.appendChild(mapElement);
+
+	setTimeout(() => {
+		const coords = [user.coordinates?.latitude ?? 50.4645, user.coordinates?.longitude ?? 30.519394197007927];
+		var map = L.map('map').setView(coords, 13);
+		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			maxZoom: 19,
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+		}).addTo(map);
+		L.marker(coords).addTo(map);
+	}, 0);
 
 	const favoriteButton = document.getElementById('favorite-button') as HTMLImageElement;
-	favoriteButton?.addEventListener('click', () => {
-		user.favorite = !user.favorite;
-		const favoritesContainer = document.getElementById('favorites-slider-container');
-		const userCardFavorite = document.getElementById(`favorite-${user._id}`);
-		const userCard = document.getElementById(user._id.toString());
+	favoriteButton?.addEventListener('click', () => handleAdditionToFavorite(user, favoriteButton));
+}
 
-		if (user.favorite) {
-			favoriteButton.src = './images/star.png';
-			favoriteButton.alt = 'Favorite';
-			const favoriteCard = userCard?.cloneNode(true) as HTMLDivElement;
-			favoriteCard.id = `favorite-${user._id}`;
-			favoritesContainer.appendChild(favoriteCard);
-		} else {
-			favoriteButton.src = './images/star_outline.png';
-			favoriteButton.alt = 'Not Favorite';
-			favoritesContainer.removeChild(userCardFavorite);
-		}
-		userCard?.classList.toggle('favorite');
-	});
+function handleAdditionToFavorite(user: StoredUser, favoriteButton: HTMLImageElement): void {
+	user.favorite = !user.favorite;
+	const favoritesContainer = document.getElementById('favorites-slider-container');
+	const userCardFavorite = document.getElementById(`favorite-${user._id}`);
+	const userCard = document.getElementById(user._id.toString());
+
+	if (user.favorite) {
+		favoriteButton.src = './images/star.png';
+		favoriteButton.alt = 'Favorite';
+		const favoriteCard = userCard?.cloneNode(true) as HTMLDivElement;
+		favoriteCard.id = `favorite-${user._id}`;
+		favoritesContainer.appendChild(favoriteCard);
+	} else {
+		favoriteButton.src = './images/star_outline.png';
+		favoriteButton.alt = 'Not Favorite';
+		favoritesContainer.removeChild(userCardFavorite);
+	}
+	userCard?.classList.toggle('favorite');
 }
 
 export function handleUserInfoPopup(): void {
@@ -116,4 +127,42 @@ function handlePopupOpen(event: Event) {
 		const id = teacherCard.id.includes('favorite') ? teacherCard.id.slice(9) : teacherCard.id;
 		showTeacherInfoPopup(id);
 	}
+}
+
+function calculateBirthday(user: StoredUser): { birthDate: dayjs.Dayjs; daysUntilBirthday: number } {
+	const today = dayjs();
+	const birthDate = dayjs(user.b_day);
+	let nextBirthday = birthDate.year(today.year());
+
+	if (nextBirthday.isBefore(today, 'day')) {
+		nextBirthday = nextBirthday.add(1, 'year');
+	}
+	const daysUntilBirthday = nextBirthday.diff(today, 'day');
+
+	return { birthDate, daysUntilBirthday };
+}
+
+function createNote(user: StoredUser): HTMLParagraphElement {
+	const note = document.createElement('p');
+	note.innerText = user.note ?? 'Note not provided';
+	return note;
+}
+
+function createMap(): { mapElement: HTMLDivElement; mapLink: HTMLAnchorElement } {
+	const mapLink = document.createElement('a');
+	mapLink.classList.add('teacher-info-toggle-map');
+	mapLink.innerText = 'Toggle map';
+	const mapElement = document.createElement('div');
+	mapElement.id = 'map';
+	mapElement.classList.add('hidden');
+
+	mapLink.addEventListener('click', toggleMap);
+
+	return { mapElement, mapLink };
+}
+
+function toggleMap() {
+	const map = document.getElementById('map') as HTMLDivElement;
+
+	map.classList.toggle('hidden');
 }

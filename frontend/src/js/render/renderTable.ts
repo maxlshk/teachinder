@@ -1,3 +1,4 @@
+import { GlobalContext } from '../context/context';
 import { setUpPagination } from '../setUpPagination';
 import { StoredUser } from '../typings/FormattedUser';
 
